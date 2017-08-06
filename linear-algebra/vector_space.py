@@ -7,8 +7,11 @@
 # @param container Lista de vetores
 # @param key Elemento pertencente a K
 def sublista(container, key):
+    # Cria lista auxiliar
     result = list()
+    # Percorre lista original
     for i in container:
+        # Adiciona vetores que satisfazem a condição
         if(i[len(i)-1] == key):
             result.append(i)
             
