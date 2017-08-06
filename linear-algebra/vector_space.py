@@ -1,4 +1,7 @@
-#K = reais
+""" CODIGO DE DESENVOLVEDOR
+    Implementação das questões propostas.
+    O corpo K escolhido foi o conjunto dos número reais.
+"""
 
 ##Resolucao da letra a
 # @param container Lista de vetores
@@ -7,7 +10,7 @@ def sublista(container, key):
     result = list()
     for i in container:
         if(i[len(i)-1] == key):
-            list.append(i)
+            result.append(i)
             
     return result
       
@@ -29,7 +32,7 @@ def soma(container):
     return result
     
     
-##Resolucao da letra b
+##Resolucao da letra c
 # @param container Lista de vetores
 # @param key Elemento pertencente a K
 def somaSublistas(container, key):
@@ -41,7 +44,7 @@ def somaSublistas(container, key):
     #Percorre a lista
     for j in range(len(sublists[0])):
         sum = 0
-        # Soma os vetores
+        # Soma os vetores que sao sublistas
         for k in range(len(sublists)):
             sum += sublists[k][j]
 
@@ -49,9 +52,13 @@ def somaSublistas(container, key):
         result[j] = sum
     
     return result
-  
+ 
+""" CODIGO CLIENTE
+    Implementação dos testes das funções definidas acima.
+"""
+
+# Cria lista e recebe dados digitados pelo usuário
 n_list = list()
-k = float(input("Digite o elemento k:"))
 
 num = int(input("Digite o tamanho do vetor:"))
 n = input("Elemento:")
@@ -63,13 +70,15 @@ while (n != ''):
         n = input("Elemento :")
     n_list.append(array)
   
-
+# Teste dos métodos
 print("##### QUESTAO 1 #####")
+k = float(input("Digite o elemento k:"))
 resultado = sublista(n_list, k)
 print( resultado )
 print("##### QUESTAO 2 #####")
 resultado = soma(n_list)
 print(resultado)
-print("##### QUESTAO 2 #####")
-resultado = soma(n_list)
+print("##### QUESTAO 3 #####")
+k = float(input("Digite o elemento k:"))
+resultado = somaSublistas(n_list, k)
 print(resultado)
