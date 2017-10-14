@@ -6,8 +6,6 @@
  *
  */
 
-package domain;
-
 public class Signal {
 	
 	private boolean event;

@@ -6,7 +6,6 @@
  * @author Mayra D. de Azevedo
  *
  */
-package domain;
 
 public class ControlPart {
 

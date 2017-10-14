@@ -4,10 +4,9 @@
  * 
  * @author Mayra D. de Azevedo
  */
-package domain;
 
 public class DMem {
-	private Port read, write;
+	private Port read, write, address;
 	private int mem[];
 	
 	/**

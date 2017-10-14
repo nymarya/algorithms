@@ -4,12 +4,11 @@
  * 
  * @author Mayra D. de Azevedo
  */
-package domain;
 
 public class BRegs {
 
 	private int regs[];
-	private Port read, write;
+	private Port read, write, adress;
 	
 	/**
 	 * Read the address 'address' of the data from the registers.
