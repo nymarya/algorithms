@@ -1,0 +1,13 @@
+
+:stem: latexmath
+
+== Problema 1
+Base para stem:[V_4]
+
+[stem] 
+++++ 
+\begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+        1&1&1&1&0&0&0&0&0&0&0&0&0&0&0&0 
+\end{array}
+++++
