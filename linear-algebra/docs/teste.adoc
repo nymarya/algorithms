@@ -1,10 +1,10 @@
-
-:stem: latexmath
+= Tarefa 2
+:stem:
 
 == Problema 1
-Conhecendo as bases para V~16~ e para V~8~, uma base para V~4~ seria
+{nbsp} Conhecendo as bases para V~16~ e para V~8~, uma base para V~4~ seria
 
-[stem] 
+[latexmath] 
 ++++ 
 b_0^4 = \begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
         \hline
@@ -12,7 +12,7 @@ b_0^4 = \begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 \end{array}
 ++++
 
-[stem] 
+[latexmath] 
 ++++ 
 b_1^4 =  \begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
         \hline
@@ -20,7 +20,7 @@ b_1^4 =  \begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 \end{array} 
 ++++
 
-[stem] 
+[latexmath] 
 ++++ 
 b_2^4 = \begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
         \hline
@@ -28,7 +28,7 @@ b_2^4 = \begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 \end{array}
 ++++
 
-[stem] 
+[latexmath] 
 ++++ 
 b_3^4 = \begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
         \hline
@@ -38,7 +38,7 @@ b_3^4 = \begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 
 De forma semelhante, para V~2~ e V~1~ temos
 
-[stem] 
+[latexmath] 
 ++++ 
 b_0^2 = \begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
         \hline
@@ -46,7 +46,7 @@ b_0^2 = \begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 \end{array}
 ++++
 
-[stem] 
+[latexmath]  
 ++++ 
 b_1^2 = \begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
         \hline
@@ -56,7 +56,7 @@ b_1^2 = \begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 
 e
 
-[stem] 
+[latexmath] 
 ++++ 
 b_0^1 = \begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
         \hline
@@ -64,5 +64,90 @@ b_0^1 = \begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 \end{array}
 ++++
 
-Em geral, uma base para V~k~ consiste em k vetores onde cada vetor v~i~^k^
+Em geral, uma base para V~k~ consiste em k vetores onde cada vetor b~i~^k^
 possui 1 nas posições ki, ki+1, ... , ki+(k-1) e 0 nas demais. Ou seja 
+
+[latexmath] 
+++++ 
+\hspace{4ex} \begin{array}{ccccccc}
+        0&1&\dots&x&x+1&\dots&15
+\end{array}
+++++
+
+[latexmath]  
+++++ 
+
+b_0^k = \begin{array}{|c|c|c|c|c|c|c|}
+        \hline
+        1&1&\dots&1\hspace{1ex}&\hspace{1ex}0 \hspace{1ex}&\hspace{1ex}\dots\hspace{1ex}&0  \\
+\end{array}
+++++
+
+
+[latexmath] 
+++++ 
+\hspace{4ex} \begin{array}{cccccccc}
+        0&\hspace{1.2ex}\dots\hspace{0.7ex}&\hspace{1.5ex}k&k+1&\dots&\hspace{0.5ex}2k-1&2k&\dots&15
+\end{array}
+++++
+
+[latexmath]  
+++++ 
+
+b_1^k = \begin{array}{|c|c|c|c|c|c|c|c|c|}
+        \hline
+        0&\hspace{0.5ex}\dots\hspace{0.5ex}&\hspace{1ex}1&\hspace{2ex}1\hspace{1ex}&\hspace{0.7ex}\dots\hspace{0.7ex} &\hspace{1.5ex}1\hspace{1.5ex}&\hspace{0.5ex}0\hspace{1.2ex}&\hspace{0.5ex}\dots\hspace{0.5ex}&0 \hspace{0.7ex} \\
+\end{array}
+++++
+{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}
+{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}
+{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}
+{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}
+{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}
+{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}
+{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}
+{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp} asciimath:[vdots]
+
+[latexmath]  
+++++ 
+\hspace{4ex} \begin{array}{ccccc}
+       \hspace{1ex}0\hspace{1ex}&\hspace{1ex}\dots&k^2-k&\dots&15
+\end{array}
+++++
+
+[latexmath] 
+++++ 
+
+b_{k-1}^k = \begin{array}{|c|c|c|c|c|}
+        \hline
+        \hspace{1ex}0\hspace{1ex}&\hspace{1ex}\dots&\hspace{2ex}1\hspace{1ex}&\dots\hspace{1ex}&1  \\
+\end{array}
+++++
+
+== Problema 2
+
+{nbsp}Sejam asciimath:[S = s_1, s_2, ..., s_k] e 
+asciimath:[T = t_1, t_2, ..., t_j], 
+asciimath:[U = Span(S)] e asciimath:[V = Span(T)]
+
+Suponha asciimath:[C = { c  ] |  asciimath:[c in S uu T} ]. Então
+os elementos gerados por asciimath:[C] são da forma 
+asciimath:[alpha_1 s_1+alpha_2 s_2+...+alpha_k s_k+beta_1 t_1+beta_2 t_2+...+beta_j t_j ]
+
+Mas, 
+
+asciimath:[alpha_1 s_1+alpha_2 s_2+...+alpha_k s_k in U ]
+
+e 
+
+[asciimath]
+++++
+beta_1 t_1+beta_2 t_2+...+beta_j t_j in V 
+++++
+
+Logo, os espaços gerados por asciimath:[C] são da forma asciimath:[W = { a + b] | asciimath:[a in U  ^^  b in V} ].
+
+Portanto, C é um conjunto de geradores para asciimath:[U o+ V] e a união de uma base para 
+asciimath:[U] e uma base para asciimath:[V] é uma base para asciimath:[Uo+V].
+
+
