@@ -7,5 +7,7 @@ def project_along(b, v):
 
 
 """
-
+Project vector b orthogonal to v.
 """
+def project_orthogonal(b, v):
+    return b - project_along(b, v);
