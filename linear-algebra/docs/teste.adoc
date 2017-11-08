@@ -2,12 +2,67 @@
 :stem: latexmath
 
 == Problema 1
-Base para stem:[V_4]
+Conhecendo as bases para V~16~ e para V~8~, uma base para V~4~ seria
 
 [stem] 
 ++++ 
-\begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+b_0^4 = \begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
         \hline
-        1&1&1&1&0&0&0&0&0&0&0&0&0&0&0&0 
+        1&1&1&1&0&0&0&0&0&0&0&0&0&0&0&0 \\
 \end{array}
 ++++
+
+[stem] 
+++++ 
+b_1^4 =  \begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+        0&0&0&0&1&1&1&1&0&0&0&0&0&0&0&0 \\
+\end{array} 
+++++
+
+[stem] 
+++++ 
+b_2^4 = \begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+        0&0&0&0&0&0&0&0&1&1&1&1&0&0&0&0 \\
+\end{array}
+++++
+
+[stem] 
+++++ 
+b_3^4 = \begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+        0&0&0&0&0&0&0&0&1&1&1&1&0&0&0&0 \\
+\end{array}
+++++
+
+De forma semelhante, para V~2~ e V~1~ temos
+
+[stem] 
+++++ 
+b_0^2 = \begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+        1&1&1&1&1&1&1&1&0&0&0&0&0&0&0&0 \\
+\end{array}
+++++
+
+[stem] 
+++++ 
+b_1^2 = \begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+        0&0&0&0&0&0&0&0&1&1&1&1&1&1&1&1 \\
+\end{array}
+++++
+
+e
+
+[stem] 
+++++ 
+b_0^1 = \begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+        1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1 \\
+\end{array}
+++++
+
+Em geral, uma base para V~k~ consiste em k vetores onde cada vetor v~i~^k^
+possui 1 nas posições ki, ki+1, ... , ki+(k-1) e 0 nas demais. Ou seja 
