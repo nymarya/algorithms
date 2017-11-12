@@ -1,8 +1,8 @@
-= Tarefa 2
+
 :stem: latexmath
 
 == Problema 1
-{nbsp} Conhecendo as bases para V~16~ e para V~8~, uma base para V~4~ seria
+{nbsp}{nbsp}{nbsp}{nbsp} Conhecendo as bases para V~16~ e para V~8~, uma base para V~4~ seria
 
 [latexmath] 
 ++++ 
@@ -36,7 +36,7 @@ b_3^4 = \begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 \end{array}
 ++++
 
-De forma semelhante, para V~2~ e V~1~ temos
+{nbsp}{nbsp}{nbsp}{nbsp}De forma semelhante, para V~2~ e V~1~ temos
 
 [latexmath] 
 ++++ 
@@ -64,7 +64,7 @@ b_0^1 = \begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 \end{array}
 ++++
 
-Em geral, uma base para V~k~ consiste em k vetores onde cada vetor b~i~^k^
+{nbsp}{nbsp}{nbsp}{nbsp}Em geral, uma base para V~k~ consiste em k vetores onde cada vetor b~i~^k^
 possui 1 nas posições ki, ki+1, ... , ki+(k-1) e 0 nas demais. Ou seja 
 
 [latexmath] 
@@ -99,14 +99,14 @@ b_1^k = \begin{array}{|c|c|c|c|c|c|c|c|c|}
         0&\hspace{0.5ex}\dots\hspace{0.5ex}&\hspace{1ex}1&\hspace{2ex}1\hspace{1ex}&\hspace{0.7ex}\dots\hspace{0.7ex} &\hspace{1.5ex}1\hspace{1.5ex}&\hspace{0.5ex}0\hspace{1.2ex}&\hspace{0.5ex}\dots\hspace{0.5ex}&0 \hspace{0.7ex} \\
 \end{array}
 ++++
-{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}
-{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}
-{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}
-{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}
-{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}
-{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}
-{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}
-{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp} latexmath:[\vdots]
+{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}
+{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}
+{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}
+{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}
+{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}
+{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}
+{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}
+{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}{nbsp} latexmath:[\vdots]
 
 [latexmath]  
 ++++ 
@@ -126,17 +126,20 @@ b_{k-1}^k = \begin{array}{|c|c|c|c|c|}
 
 == Problema 2
 
-{nbsp}Sejam latexmath:[S = s_1, s_2, ..., s_k] e 
+{nbsp}{nbsp}{nbsp}{nbsp}Sejam latexmath:[S = s_1, s_2, ..., s_k] e 
 latexmath:[T = t_1, t_2, ..., t_j], 
 latexmath:[U = Span(S)] e latexmath:[V = Span(T)]
 
-Suponha  latexmath:[\left\{ c| c \in U \cup V \right\} ]. Então
+{nbsp}{nbsp}{nbsp}{nbsp}Suponha  latexmath:[\left\{ c| c \in U \cup V \right\} ]. Então
 os elementos gerados por latexmath:[C] são da forma 
-latexmath:[\alpha_1 s_1+\alpha_2 s_2+...+\alpha_k s_k+\beta_1 t_1+\beta_2 t_2+...+\beta_j t_j ]
+latexmath:[\alpha_1 s_1 + \alpha_2 s_2 + ... + \alpha_k s_k + \beta_1 t_1 + \beta_2 t_2 +...+ \beta_j t_j ]
 
-Mas, 
+{nbsp}{nbsp}{nbsp}{nbsp}Mas, 
 
-latexmath:[\alpha_1 s_1+\alpha_2 s_2+...+\alpha_k s_k \in U ]
+[latexmath]
+++++
+\alpha_1 s_1+\alpha_2 s_2+...+\alpha_k s_k \in U
+++++
 
 e 
 
@@ -145,15 +148,15 @@ e
 \beta_1 t_1+\beta_2 t_2+...+\beta_j t_j \in V 
 ++++
 
-Logo, os espaços gerados por latexmath:[C] são da forma latexmath:[W = \left\{ a + b | a \in U \wedge  b \in V \right\} ].
+{nbsp}{nbsp}{nbsp}{nbsp}Logo, os espaços gerados por latexmath:[C] são da forma latexmath:[W = \left\{ a + b | a \in U \wedge  b \in V \right\} ].
 
-Portanto, latexmath:[C] é um conjunto de geradores para latexmath:[U \oplus V] e a união de uma base para 
+{nbsp}{nbsp}{nbsp}{nbsp}Portanto, latexmath:[C] é um conjunto de geradores para latexmath:[U \oplus V] e a união de uma base para 
 latexmath:[U] e uma base para latexmath:[V] é uma base para latexmath:[U \oplus V].
 
 
 == Problema 3
 
-{nbsp}Sabendo que 
+{nbsp}{nbsp}{nbsp}{nbsp}Sabendo que 
 [latexmath] 
 ++++ 
 b_0^{16} = \begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
@@ -189,7 +192,7 @@ b_7^{8} = \begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 \end{array}
 ++++
 
-Temos que a projeção de b~0~^16^ 
+{nbsp}{nbsp}{nbsp}{nbsp}Temos que a projeção de b~0~^16^ 
 ao longo de b~0~^8^
 é
 
@@ -199,7 +202,7 @@ ao longo de b~0~^8^
 \cdot b_0^{8}
 ++++
 
-Substituindo fica
+{nbsp}{nbsp}{nbsp}{nbsp}Substituindo fica
 [latexmath] 
 ++++ 
 \frac{(1)(1)+(0)(1)+(0)(0)+...+(0)(0)}
@@ -214,7 +217,7 @@ Substituindo fica
 \cdot b_0^{8}
 ++++
 
-Então, a projeção de b~0~^16^ 
+{nbsp}{nbsp}{nbsp}{nbsp}Então, a projeção de b~0~^16^ 
 ao longo de b~0~^8^ 
 é
 
@@ -226,7 +229,7 @@ ao longo de b~0~^8^
 \end{array}
 ++++
 
-Ao efetuarmos b~0~^16^ 
+{nbsp}{nbsp}{nbsp}{nbsp}Ao efetuarmos b~0~^16^ 
 - b~0~^8^
 para encontrarmos o complemento, temos
 
@@ -238,7 +241,7 @@ para encontrarmos o complemento, temos
 \end{array}
 ++++
 
-O que nos dá o primeiro vetor base. Isto é,
+{nbsp}{nbsp}{nbsp}{nbsp}O que nos dá o primeiro vetor base. Isto é,
 [latexmath] 
 ++++ 
 w_0^{8} = \begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
@@ -247,7 +250,7 @@ w_0^{8} = \begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 \end{array}
 ++++
 
-Projetando b~1~^16^
+{nbsp}{nbsp}{nbsp}{nbsp}Projetando b~1~^16^
 ortogonal a V~8~
 apenas vamos obter o negativo de w~0~^8^.
 Vamos então prosseguir com a projeção de b~2~^16^.
@@ -267,7 +270,7 @@ Deste modo,
 \cdot b_1^{8}
 ++++
 
-Então, a projeção de b~2~^16^ 
+{nbsp}{nbsp}{nbsp}{nbsp}Então, a projeção de b~2~^16^ 
 ao longo de b~1~^8^ 
 é
 
@@ -279,7 +282,7 @@ ao longo de b~1~^8^
 \end{array}
 ++++
 
-Logo, nosso segundo vetor base w~1~^8^ =
+{nbsp}{nbsp}{nbsp}{nbsp}Logo, nosso segundo vetor base w~1~^8^ =
 
 [latexmath] 
 ++++ 
@@ -289,7 +292,7 @@ Logo, nosso segundo vetor base w~1~^8^ =
 \end{array}
 ++++
 
-Podemos perceber que o coeficiente obtido sempre será 1/2, alterando no cálculo apenas o vetor b~i~^8^
+{nbsp}{nbsp}{nbsp}{nbsp}Podemos perceber que o coeficiente obtido sempre será 1/2, alterando no cálculo apenas o vetor b~i~^8^
 e b~i~^16^,
 já que todos possuem a mesma forma.
 Repetindo, portanto, o processo ao realizar o cálculo, 
@@ -375,7 +378,7 @@ w_7^8 =
 
 == Problema 4
 
-Utilizemos a mesma lógica expressa na questão anterior para encontrarmos os vetores que
+{nbsp}{nbsp}{nbsp}{nbsp}Utilizemos a mesma lógica expressa na questão anterior para encontrarmos os vetores que
 compreendem a base W~4~, 
 complemento ortogonal de V~4~
 em V~8~,
@@ -387,11 +390,11 @@ bem como os vetores que compreendem a base W~2~ e W~1~.
 .*
 
 
-Sabendo que b~0~^8^
+{nbsp}{nbsp}{nbsp}{nbsp}Sabendo que b~0~^8^
 é ortogonal a b~0~^4^,
 b~1~^4^, b~2~^4^, b~3~^4^.
 
-Temos que a projeção de b~0~^8^
+{nbsp}{nbsp}{nbsp}{nbsp}Temos que a projeção de b~0~^8^
 ao longo de b~0~^4^ é
 
 [latexmath] 
@@ -411,7 +414,7 @@ ao longo de b~0~^4^ é
 \cdot b_0^{4}
 ++++
 
-Então, a projeção de b~0~^8^ 
+{nbsp}{nbsp}{nbsp}{nbsp}Então, a projeção de b~0~^8^ 
 ao longo de b~0~^4^ 
 é
 
@@ -423,7 +426,7 @@ ao longo de b~0~^4^
 \end{array}
 ++++
 
-O complemento é dado por 
+{nbsp}{nbsp}{nbsp}{nbsp}O complemento é dado por 
 w~0~^4^ = b~0~^8^ - b~0~^4^. 
 Logo, 
 
@@ -442,7 +445,7 @@ w_0^4 =
 *1.2. Vetor w~1~^4^
 .*
 
-Temos que a projeção de b~2~^8^
+{nbsp}{nbsp}{nbsp}{nbsp}Temos que a projeção de b~2~^8^
 ao longo de b~1~^4^ é
 
 [latexmath] 
@@ -462,7 +465,7 @@ ao longo de b~1~^4^ é
 \cdot b_1^{4}
 ++++
 
-Então, a projeção de b~2~^8^ 
+{nbsp}{nbsp}{nbsp}{nbsp}Então, a projeção de b~2~^8^ 
 ao longo de b~1~^4^ 
 é
 
@@ -474,7 +477,7 @@ ao longo de b~1~^4^
 \end{array}
 ++++
 
-O complemento é dado por 
+{nbsp}{nbsp}{nbsp}{nbsp}O complemento é dado por 
 w~1~^4^ = b~2~^8^ - b~1~^4^.
 Logo, 
 [latexmath] 
@@ -491,7 +494,7 @@ w_1^4 =
 *1.3. Vetor w~2~^4^
 .*
 
-Temos que a projeção de b~4~^8^
+{nbsp}{nbsp}{nbsp}{nbsp}Temos que a projeção de b~4~^8^
 ao longo de b~2~^4^ é
 
 [latexmath] 
@@ -511,7 +514,7 @@ ao longo de b~2~^4^ é
 \cdot b_2^{4}
 ++++
 
-Então, a projeção de b~4~^8^ 
+{nbsp}{nbsp}{nbsp}{nbsp}Então, a projeção de b~4~^8^ 
 ao longo de b~2~^4^ 
 é
 
@@ -523,7 +526,7 @@ ao longo de b~2~^4^
 \end{array}
 ++++
 
-O complemento é dado por 
+{nbsp}{nbsp}{nbsp}{nbsp}O complemento é dado por 
 w~2~^4^ = b~4~^8^ - b~2~^4^.
 Logo, 
 [latexmath] 
@@ -539,7 +542,7 @@ w_2^4 =
 *1.4. Vetor w~3~^4^
 .*
 
-Temos que a projeção de b~6~^8^
+{nbsp}{nbsp}{nbsp}{nbsp}Temos que a projeção de b~6~^8^
 ao longo de b~3~^4^ é
 
 [latexmath] 
@@ -559,7 +562,7 @@ ao longo de b~3~^4^ é
 \cdot b_3^{4}
 ++++
 
-Então, a projeção de b~6~^8^ 
+{nbsp}{nbsp}{nbsp}{nbsp}Então, a projeção de b~6~^8^ 
 ao longo de b~3~^4^ 
 é
 
@@ -571,7 +574,7 @@ ao longo de b~3~^4^
 \end{array}
 ++++
 
-O complemento é dado por 
+{nbsp}{nbsp}{nbsp}{nbsp}O complemento é dado por 
 w~3~^4^ = b~6~^8^ - b~3~^4^.
 Logo, 
 [latexmath] 
@@ -586,7 +589,7 @@ w_3^4 =
 *1.5. Síntese
 .*
 
-Portanto, os vetores wavelet da base de W4 ortogonal a base de V4 em V8 é:
+{nbsp}{nbsp}{nbsp}{nbsp}Portanto, os vetores wavelet da base de W4 ortogonal a base de V4 em V8 é:
 
 [latexmath] 
 ++++ 
@@ -632,11 +635,11 @@ w_3^4 =
 *2.1. Vetor w~0~^2^
 .*
 
-Sabendo que b~0~^4^
+{nbsp}{nbsp}{nbsp}{nbsp}Sabendo que b~0~^4^
 é ortogonal a b~0~^2^,
 b~1~^2^.
 
-Temos que a projeção de b~0~^4^
+{nbsp}{nbsp}{nbsp}{nbsp}Temos que a projeção de b~0~^4^
 ao longo de b~0~^2^ é
 
 [latexmath] 
@@ -656,7 +659,7 @@ ao longo de b~0~^2^ é
 \cdot b_0^{2}
 ++++
 
-Então, a projeção de b~0~^4^ 
+{nbsp}{nbsp}{nbsp}{nbsp}Então, a projeção de b~0~^4^ 
 ao longo de b~0~^2^ 
 é
 
@@ -668,7 +671,7 @@ ao longo de b~0~^2^
 \end{array}
 ++++
 
-O complemento é dado por 
+{nbsp}{nbsp}{nbsp}{nbsp}O complemento é dado por 
 w~0~^2^ = b~0~^4^ - b~0~^2^. 
 Logo, 
 
@@ -684,7 +687,7 @@ w_0^2 =
 *2.2. Vetor w~1~^2^
 .*
 
-Temos que a projeção de b~2~^4^
+{nbsp}{nbsp}{nbsp}{nbsp}Temos que a projeção de b~2~^4^
 ao longo de b~1~^2^ é
 
 [latexmath] 
@@ -704,7 +707,7 @@ ao longo de b~1~^2^ é
 \cdot b_1^{2}
 ++++
 
-Então, a projeção de b~2~^4^ 
+{nbsp}{nbsp}{nbsp}{nbsp}Então, a projeção de b~2~^4^ 
 ao longo de b~1~^2^ 
 é
 
@@ -716,7 +719,7 @@ ao longo de b~1~^2^
 \end{array}
 ++++
 
-O complemento é dado por 
+{nbsp}{nbsp}{nbsp}{nbsp}O complemento é dado por 
 w~1~^2^ = b~2~^4^ - b~1~^2^. 
 Logo, 
 
@@ -732,7 +735,7 @@ w_1^2 =
 *2.3. Síntese
 .*
 
-Portanto, os vetores wavelet da base de W2 ortogonal a base de V2 em V4 é:
+{nbsp}{nbsp}{nbsp}{nbsp}Portanto, os vetores wavelet da base de W2 ortogonal a base de V2 em V4 é:
 
 [latexmath] 
 ++++ 
@@ -757,7 +760,7 @@ w_1^2 =
 
 ===== *3. Encontrar o vetor que compreende a base W~1~*
 
-Temos que a projeção de b~0~^2^
+{nbsp}{nbsp}{nbsp}{nbsp}Temos que a projeção de b~0~^2^
 ao longo de b~0~^1^ é
 
 [latexmath] 
@@ -777,7 +780,7 @@ ao longo de b~0~^1^ é
 \cdot b_0^{1}
 ++++
 
-Então, a projeção de b~0~^2^ 
+{nbsp}{nbsp}{nbsp}{nbsp}Então, a projeção de b~0~^2^ 
 ao longo de b~0~^1^ 
 é
 
@@ -789,7 +792,7 @@ ao longo de b~0~^1^
 \end{array}
 ++++
 
-O complemento é dado por 
+{nbsp}{nbsp}{nbsp}{nbsp}O complemento é dado por 
 w~0~^1^ = b~0~^2^ - b~0~^1^. 
 Logo, 
 
@@ -803,7 +806,7 @@ w_0^1 =
 ++++
 
 == Problema 5
-Seja latexmath:[v] o vetor que representa 
+{nbsp}{nbsp}{nbsp}{nbsp}Seja latexmath:[v] o vetor que representa 
 a imagem de dimensão 1 de modo que
 [latexmath]
 ++++
@@ -815,7 +818,7 @@ a imagem de dimensão 1 de modo que
 \]
 ++++
 
-Calculando o coeficiente x~0~ para latexmath:[v], temos
+{nbsp}{nbsp}{nbsp}{nbsp}Calculando o coeficiente x~0~ para latexmath:[v], temos
 
 [latexmath]
 ++++
@@ -835,7 +838,7 @@ x_0 = \frac{<v, b_0^8>}{ <b_0^8, b_0^8>}
 
 == Problema 6 
 
-Calculando o coeficiente y~0~ para latexmath:[v], temos
+{nbsp}{nbsp}{nbsp}{nbsp}Calculando o coeficiente y~0~ para latexmath:[v], temos
 
 [latexmath]
 ++++
