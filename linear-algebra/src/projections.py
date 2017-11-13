@@ -18,6 +18,13 @@ def sub_vectors(a, b):
 
     return newList
 
+def sum_vectors(a, b):
+    newList = [];
+    for i in range(0,len(b)):
+        newList.append(a[i] + b[i])
+
+    return newList
+
 """
 Project vector b onto the span of v.
 """
@@ -46,3 +53,17 @@ def project_orthogonal(b, v):
     for el in v:
         b = sub_vectors(b, el)
     return b
+
+def scalar_multiplication(a, v):
+    """
+    """
+    for el in v:
+        el *= a
+
+    return v
+
+def get_norm(v):
+    """
+    Return the norm of v
+    """
+    return sqrt(inner_product(v,v))
