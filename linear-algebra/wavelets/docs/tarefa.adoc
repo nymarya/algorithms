@@ -852,3 +852,266 @@ y_0 = \frac{<v, w_0^8>}{<w_0^8, w_0^8>}
 = \frac{2-2.5}{0.25+0.25} = \frac{-0.5}{0.5} = -1
  
 ++++
+
+== Problema 7
+
+{nbsp}{nbsp}{nbsp}{nbsp}Seja o vetor v
+[latexmath]
+++++
+\[ v = 
+
+[ \begin{array}{cccccccccccccccc}
+        4&5&3&7&4&5&2&3&9&7&3&5&0&0&0&0 \\
+\end{array}]
+\]
+++++
+
+{nbsp}{nbsp}{nbsp}{nbsp}A representação normalizada de v segue
+
+[latexmath]
+++++
+v = 
+(||v_1||\alpha_1)
+\frac{v_1}{||v_1||}
++ ... +
+(||v_n||\alpha_n)
+\frac{v_n}{||v_n||}
+++++
+
+{nbsp}{nbsp}{nbsp}{nbsp}Sendo v~1~, v~2~, ... , v~n~ equivalentes à base W e ao b~0~^1^
+isto é,
+
+[latexmath] 
+++++ 
+w_0^8, w_1^8, w_2^8, w_3^8, w_4^8, w_5^8, w_6^8, w_7^8
+++++
+
+[latexmath] 
+++++ 
+w_0^4, w_1^4, w_2^4, w_3^4
+++++
+
+[latexmath] 
+++++ 
+w_0^2, w_1^2
+++++
+
+[latexmath] 
+++++ 
+w_0^1
+++++
+
+[latexmath] 
+++++ 
+b_0^1
+++++
+
+{nbsp}{nbsp}{nbsp}{nbsp}Vetores já obtidos por meio das questões 3 e 4, tais que
+
+[latexmath] 
+++++ 
+w_0^8 = 
+\begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+        0.5&-0.5&0&0&0&0&0&0&0&0&0&0&0&0&0&0 \\
+\end{array}
+++++
+
+[latexmath] 
+++++ 
+w_1^8 = 
+\begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+        0&0&0.5&-0.5&0&0&0&0&0&0&0&0&0&0&0&0 \\
+\end{array}
+++++
+
+
+[latexmath] 
+++++ 
+w_2^8 = 
+\begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+        0&0&0&0&0.5&-0.5&0&0&0&0&0&0&0&0&0&0 \\
+\end{array}
+++++
+
+
+[latexmath] 
+++++ 
+w_3^8 = 
+\begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+        0&0&0&0&0&0&0.5&-0.5&0&0&0&0&0&0&0&0 \\
+\end{array}
+++++
+
+[latexmath] 
+++++ 
+w_4^8 = 
+\begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+        0&0&0&0&0&0&0&0&0.5&-0.5&0&0&0&0&0&0 \\
+\end{array}
+++++
+
+[latexmath] 
+++++ 
+w_5^8 = 
+\begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+        0&0&0&0&0&0&0&0&0&0&0.5&-0.5&0&0&0&0 \\
+\end{array}
+++++
+
+[latexmath] 
+++++ 
+w_6^8 = 
+\begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+        0&0&0&0&0&0&0&0&0&0&0&0&0.5&-0.5&0&0 \\
+\end{array}
+++++
+
+[latexmath] 
+++++ 
+w_7^8 = 
+\begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+        0&0&0&0&0&0&0&0&0&0&0&0&0&0&0.5&-0.5 \\
+\end{array}
+++++
+
+
+[latexmath] 
+++++ 
+w_0^4 = 
+\begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+        0.5&0.5&-0.5&-0.5&0&0&0&0&0&0&0&0&0&0&0&0 \\
+\end{array}
+++++
+
+[latexmath] 
+++++ 
+w_1^4 = 
+\begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+        0&0&0&0&0.5&0.5&-0.5&-0.5&0&0&0&0&0&0&0&0 \\
+\end{array}
+++++
+
+[latexmath] 
+++++ 
+w_2^4 = 
+\begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+        0&0&0&0&0&0&0&0&0.5&0.5&-0.5&-0.5&0&0&0&0 \\
+\end{array}
+++++
+
+[latexmath] 
+++++ 
+w_3^4 = 
+\begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+        0&0&0&0&0&0&0&0&0&0&0&0&0.5&0.5&-0.5&-0.5 \\
+\end{array}
+++++
+
+
+[latexmath] 
+++++ 
+w_0^2 = 
+\begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+        0.5&0.5&0.5&0.5&-0.5&-0.5&-0.5&-0.5&0&0&0&0&0&0&0&0 \\
+\end{array}
+++++
+
+[latexmath] 
+++++ 
+w_1^2 = 
+\begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+        0&0&0&0&0&0&0&0&0.5&0.5&0.5&0.5&-0.5&-0.5&-0.5&-0.5 \\
+\end{array}
+++++
+
+[latexmath] 
+++++ 
+w_0^1 = 
+\begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+        0.5&0.5&0.5&0.5&0.5&0.5&0.5&0.5&-0.5&-0.5&-0.5&-0.5&-0.5&-0.5&-0.5&-0.5 \\
+\end{array}
+++++
+
+[latexmath] 
+++++ 
+b_0^1 = 
+\begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+        0.5&0.5&0.5&0.5&0.5&0.5&0.5&0.5&0.5&0.5&0.5&0.5&0.5&0.5&0.5&0.5
+\end{array}
+++++
+
+{nbsp}{nbsp}{nbsp}{nbsp}Temos também já calculados no tópico 6 os coeficientes wavelet, equivalentes a
+
+[latexmath]
+++++
+\alpha_1 = -1 ;
+\alpha_2 = -4 ;
+\alpha_3 = -1 ;
+\alpha_4 = 2 ;
+++++
+
+[latexmath]
+++++
+\alpha_5 = -1 ;
+\alpha_6 = -2 ;
+\alpha_7 = 0 ;
+\alpha_8 = 0 ;
+++++
+
+[latexmath]
+++++
+\alpha_9 = -1/2 ;
+\alpha_{10} = -7/2 ;
+\alpha_{11} = -3/2 ;
+\alpha_{12} = 0 ;
+++++
+
+[latexmath]
+++++
+\alpha_{13} = -6/4 ;
+\alpha_{14} = 13/4 ;
+\alpha_{15} = 31/8 ;
+\alpha_{16} = 57/16 ;
+++++
+
+{nbsp}{nbsp}{nbsp}{nbsp}Portanto, basta substituir na fórmula, tal que
+
+[latexmath]
+++++
+v = 
+(||w_0^8||\alpha_1)
+\frac{w_0^8}{||w_0^8||}
++
+(||w_1^8||\alpha_2)
+\frac{w_1^8}{||w_1^8||}
++ ... +
+(||b_0^1||\alpha_{16})
+\frac{b_0^1}{||b_0^1||}
+++++
+
+{nbsp}{nbsp}{nbsp}{nbsp} Calculando, chegamos a 
+[latexmath]
+++++
+\[ v = 
+
+[ \begin{array}{cccccccccccccccc}
+        2.5&1.5&1.5&0.5&1.5&0.5&0.5&-0.5&1.5&0.5&0.5&-0.5&0.5&-0.5&-0.5&-1.5 \\
+\end{array}]
+\]
+++++
