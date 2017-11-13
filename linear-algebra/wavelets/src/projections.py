@@ -57,10 +57,11 @@ def project_orthogonal(b, v):
 def scalar_multiplication(a, v):
     """
     """
+    newV = []
     for el in v:
-        el *= a
+        newV.append(el * a)
 
-    return v
+    return newV
 
 def get_norm(v):
     """

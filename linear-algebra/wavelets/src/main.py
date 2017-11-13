@@ -8,8 +8,12 @@ import projections
 v = [4,5,3,7,4,5,2,3,9,7,3,5,0,0,0,0]
 
 haar = transform.forward_no_normalization(v)
-
+print(haar)
 normCoefs = transform.normalize_coefficients(16, haar)
+print(normCoefs)
+
+vv = [1, 2]
+print( projections.scalar_multiplication(2, vv))
 
 #Haar basis
 v1 = [0.5, -0.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
@@ -36,15 +40,24 @@ newV = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 n = 8
 j = 0
 for i in range(16):
-    newV = projections.sum_vectors(newV, projections.scalar_multiplication(haar.get(n, j), basis[i]))
+    print("[latexmath]")
+    print("++++")
+    s = "\[ w{"+str(j) + "}^{"+str(n)+"} = "
+    print s
+    print("\begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}")
+    print("\hline")
+    newVec = projections.scalar_multiplication(normCoefs.get(n, j), basis[i])
+    message = ""
+    for el in newVec:
+        message += str(el) + "&"
+
+    print(message)
+    print("\end{array}")
+    print("\]")
+    print("++++")
     if( j == n ):
         n /= 2
         j = 0
     else:
         j += 1
 
-message = ""
-for el in newV:
-    message += str(el) + "&"
-
-print(message)

@@ -30,6 +30,5 @@ def normalize_coefficients(n, D):
     for el in D.items():
         square = sqrt(n / (4*el[0][0])) if el[0][0] != 0 else sqrt(n)
         dic. update({(el[0][0], el[0][1]): el[1 ]* square})
-        D.update(dic)
 
     return dic
