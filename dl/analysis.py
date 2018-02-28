@@ -14,16 +14,25 @@ for row in sheet.iter_rows(min_row=3, min_col=2):
         newRow.append(cell.value)
     datasheet.append(tuple(newRow))
     
-data = np.array(datasheet)
+#Transpose matrix so we can calculate both covariance and correlation matrix
+data = np.reshape( np.array(datasheet), (9, 683) )
 covMatrix = np.cov(data)
+corMatrix = np.corrcoef(data)
 
 #Save data in file
 datafile = open("analysis.txt", "w")
 datafile.write("Original\n")
 datafile.write("Covariance matrix: \n")
-for i in np.nditer(covMatrix.T):
-    print i
+for i in range(covMatrix.shape[0]):
+    datafile.write(str(covMatrix[i]))
+    datafile.write('\n')
+datafile.close()
+
+datafile = open("analysis.txt", "a")
+datafile.write("\nCorrelation matrix: \n")
+for i in range(corMatrix.shape[0]):
+    datafile.write(str(corMatrix[i]))
+    datafile.write('\n')
 datafile.close()
 
 print "Done ;)\nBye"
-#print np.array([(881092, 9.3),(729387,8.0)], dtype='>i4, float')
