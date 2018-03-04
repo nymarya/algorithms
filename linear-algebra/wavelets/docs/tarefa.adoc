@@ -1106,12 +1106,167 @@ v =
 ++++
 
 {nbsp}{nbsp}{nbsp}{nbsp} Calculando, chegamos a 
+
 [latexmath]
 ++++
-\[ v = 
-
-[ \begin{array}{cccccccccccccccc}
-        2.5&1.5&1.5&0.5&1.5&0.5&0.5&-0.5&1.5&0.5&0.5&-0.5&0.5&-0.5&-0.5&-1.5 \\
-\end{array}]
+\[ w_{0}^{8} = 
+\begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+0.0&-0.0&0&0&0&0&0&0&0&0&0&0&0&0&0&0&
+\end{array}
 \]
 ++++
+
+[latexmath]
+++++
+\[ w_{1}^{8} = 
+\begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+0&0&0.5&-0.5&0&0&0&0&0&0&0&0&0&0&0&0&
+\end{array}
+\]
+++++
+
+[latexmath]
+++++
+\[ w_{2}^{8} = 
+\begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+0&0&0&0&1.0&-1.0&0&0&0&0&0&0&0&0&0&0&
+\end{array}
+\]
+++++
+
+[latexmath]
+++++
+\[ w_{3}^{8} = 
+\begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+0&0&0&0&0&0&1.5&-1.5&0&0&0&0&0&0&0&0&
+\end{array}
+\]
+++++
+
+[latexmath]
+++++
+\[ w_{4}^{8} = 
+\begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+0&0&0&0&0&0&0&0&2.0&-2.0&0&0&0&0&0&0&
+\end{array}
+\]
+++++
+
+[latexmath]
+++++
+\[ w_{5}^{8} = 
+\begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+0&0&0&0&0&0&0&0&0&0&2.5&-2.5&0&0&0&0&
+\end{array}
+\]
+++++
+
+[latexmath]
+++++
+\[ w_{6}^{8} = 
+\begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+0&0&0&0&0&0&0&0&0&0&0&0&3.0&-3.0&0&0&
+\end{array}
+\]
+++++
+
+[latexmath]
+++++
+\[ w_{7}^{8} = 
+\begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+0&0&0&0&0&0&0&0&0&0&0&0&0&0&3.5&-3.5&
+\end{array}
+\]
+++++
+
+[latexmath]
+++++
+\[ w_{0}^{4} = 
+\begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+4.0&4.0&-4.0&-4.0&0&0&0&0&0&0&0&0&0&0&0&0&
+\end{array}
+\]
+++++
+
+[latexmath]
+++++
+\[ w_{1}^{4} = 
+\begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+0&0&0&0&0.0&0.0&-0.0&-0.0&0&0&0&0&0&0&0&0&
+\end{array}
+\]
+++++
+
+[latexmath]
+++++
+\[ w_{2}^{4} = 
+\begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+0&0&0&0&0&0&0&0&0.5&0.5&-0.5&-0.5&0&0&0&0&
+\end{array}
+\]
+++++
+
+[latexmath]
+++++
+\[ w_{3}^{4} = 
+\begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+0&0&0&0&0&0&0&0&0&0&0&0&1.0&1.0&-1.0&-1.0&
+\end{array}
+\]
+++++
+
+[latexmath]
+++++
+\[ w_{0}^{2} = 
+\begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+1.5&1.5&1.5&1.5&-1.5&-1.5&-1.5&-1.5&0&0&0&0&0&0&0&0&
+\end{array}
+\]
+++++
+
+[latexmath]
+++++
+\[ w_{1}^{2} = 
+\begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+0&0&0&0&0&0&0&0&2.0&2.0&2.0&2.0&-2.0&-2.0&-2.0&-2.0&
+\end{array}
+\]
+++++
+
+[latexmath]
+++++
+\[ w_{0}^{1} = 
+\begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+0.0&0.0&0.0&0.0&0.0&0.0&0.0&0.0&-0.0&-0.0&-0.0&-0.0&-0.0&-0.0&-0.0&-0.0&
+\end{array}
+\]
+++++
+
+[latexmath]
+++++
+\[ w_{0}^{0} = 
+\begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+0.5&0.5&0.5&0.5&0.5&0.5&0.5&0.5&0.5&0.5&0.5&0.5&0.5&0.5&0.5&0.5
+\end{array}
+\]
+++++
+
+
+=== Link para implementação 
+https://goo.gl/84aipJ
