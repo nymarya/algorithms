@@ -1,8 +1,9 @@
 from scipy import ndimage, misc
 import numpy as np
 import cv2
+import os
 
-face = cv2.imread('../data/dsc07348.jpg')
+face = cv2.imread('../data/imag2.jpg', cv2.IMREAD_COLOR)
 filtroPassaAlta = np.array([[-1,-1,-1],[-1,8,-1],[-1,-1,-1]], dtype=np.float32)
 filtroPassaAlta2 = np.array([
     [-1,-1,-1, -1, -1],
