@@ -3,7 +3,7 @@ import numpy as np
 import cv2
 import os
 
-face = cv2.imread('../data/imag2.jpg', cv2.IMREAD_COLOR)
+face = cv2.imread('../data/dsc07348.jpg', cv2.IMREAD_UNCHANGED)
 filtroPassaAlta = np.array([[-1,-1,-1],[-1,8,-1],[-1,-1,-1]], dtype=np.float32)
 filtroPassaAlta2 = np.array([
     [-1,-1,-1, -1, -1],
@@ -27,12 +27,5 @@ img.append(cv2.filter2D(face, ddepth, np.transpose(filterDetector)))
 import matplotlib.pyplot as plt
 
 n_images = len(img)
-fig = plt.figure()
 for n, (image) in enumerate(img):
-    a = fig.add_subplot(np.ceil(n_images/2.0), 2, n + 1)
-    if image.ndim == 2:
-        plt.gray()
-    plt.imshow(image)
-    a.set_title("Image ("+str(n)+")")
-fig.set_size_inches(np.array(fig.get_size_inches()) * n_images)
-plt.show()
+    cv2.imwrite('../gallery/image'+str(n)+'.png',image)
