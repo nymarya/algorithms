@@ -54,6 +54,16 @@ float newton(float(*func)(float ), float(*func1)(float), float x){
     return xk;
 }
 
+const float euler = std::exp(1.0);
+//Questao 3
+float s( float t){
+    //s(t) = s0 − (mg/k)t + ((g*m^2)/k^2)*(1 - e^(-kt/m))
+    float a = 0.25 * 32.17)/0.1;
+    float b = std::pow(0.25, 2.0) * 32.17)/std::pow(0.1, 2.0);
+    float c = 1 - std::pow( euler , (-0.1 * t)/0.25);
+    return (300.0 - (a*t + (b *  c));
+}
+
 int main(  ) {
     
     //questao 1
