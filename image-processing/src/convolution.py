@@ -1,6 +1,6 @@
 import numpy as np
 
-def linearConv(kernel, vector, type='full'):
+def linear_conv(kernel, vector, type='full'):
     """Realize linear convolution between two one-dimensional arrays.
 
     Keyword arguments:

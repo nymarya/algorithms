@@ -1,9 +1,10 @@
 import numpy as np
-import cv2
+from cv2 import imread, cvtColor, IMREAD_COLOR, IMREAD_GRAYSCALE, COLOR_BGR2GRAY
 import convolution as conv
+import filters
 
-face = cv2.imread('../data/dsc07348.jpg', cv2.IMREAD_COLOR)
-faceGray = cv2.imread('../data/dsc07348.jpg', cv2.IMREAD_GRAYSCALE)
+face = imread('../data/dsc07348.jpg', IMREAD_COLOR)
+faceGray = imread('../data/dsc07348.jpg', IMREAD_GRAYSCALE)
 filtroPassaAlta = np.array([[-1,-1,-1],[-1,8,-1],[-1,-1,-1]], dtype=np.float32)
 filtroPassaAlta2 = np.array([
     [-1,-1,-1, -1, -1],
@@ -14,28 +15,41 @@ filtroPassaAlta2 = np.array([
     ], dtype=np.float32)
 filterDetector = np.array([[1,0,-1],[1,  0,-1],[1,0,-1]], dtype=np.float32)
 
-ddepth = -1
+filters.apply_filter(face, filtroPassaAlta, '../gallery/image1.png')
+filters.apply_filter(faceGray, filtroPassaAlta, '../gallery/image2.png')
+filters.apply_filter(face, filtroPassaAlta2, '../gallery/image3.png')
+filters.apply_filter(faceGray, filtroPassaAlta2, '../gallery/image4.png')
+filters.apply_filter(face, filterDetector, '../gallery/image5.png')
+filters.apply_filter(faceGray, filterDetector, '../gallery/image6.png')
+filters.apply_filter(face,  np.transpose(filterDetector), '../gallery/image7.png')
+filters.apply_filter(faceGray,  np.transpose(filterDetector), '../gallery/image8.png')
 
-img = list()
-img.append(face)
-img.append(faceGray)
-img.append(cv2.filter2D(face, ddepth, filtroPassaAlta))
-img.append(cv2.filter2D(faceGray, ddepth, filtroPassaAlta))
-img.append(cv2.filter2D(face, ddepth, filtroPassaAlta2))
-img.append(cv2.filter2D(faceGray, ddepth, filtroPassaAlta2))
-img.append(cv2.filter2D(face, ddepth, filterDetector))
-img.append(cv2.filter2D(faceGray, ddepth, filterDetector))
-img.append(cv2.filter2D(face, ddepth, np.transpose(filterDetector)))
-img.append(cv2.filter2D(faceGray, ddepth, np.transpose(filterDetector)))
-
-n_images = len(img)
-for n, (image) in enumerate(img):
-    cv2.imwrite('../gallery/image'+str(n)+'.png',image)
+###########################################
+## Problem 1
     
 array1 = np.array([1,2,3,4,5])
 array2 = np.array([1,2,3])
 print(np.convolve(array1, array2, 'same'))
-print(np.convolve(array2, array1, 'same'))
-print(conv.linearConv(array1,array2, 'same'))
+print(conv.linear_conv(array1,array2, 'same'))
+
 print(np.convolve(array1, array2))
-print(conv.linearConv(array1,array2))
+print(conv.linear_conv(array1,array2))
+
+print(np.convolve(array2, array1))
+print(conv.linear_conv(array2,array1))
+
+
+#########################################
+#Problem 3
+
+image = imread('../data/DL04_Img1.jpg', IMREAD_COLOR)
+image_gray = cvtColor(image, COLOR_BGR2GRAY)
+
+filter1 = np.array([[1.0/9.0 for x in range(0, 3)] for y in range(0, 3)], dtype=np.float32)
+filter2 = np.array([[1.0/49.0 for x in range(0, 7)] for y in range(0, 7)], dtype=np.float32)
+filter3 = np.array([[1.0/121.0 for x in range(0, 11)] for y in range(0, 11)], dtype=np.float32)
+
+filters.apply_filter(image_gray, filter1, '../gallery/result1.png')
+filters.apply_filter(image_gray, filter2, '../gallery/result2.png')
+filters.apply_filter(image_gray, filter3, '../gallery/result3.png')
+filters.apply_filter(image, filter3, '../gallery/result4.png')
