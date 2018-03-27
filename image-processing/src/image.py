@@ -53,3 +53,12 @@ filters.apply_filter(image_gray, filter1, '../gallery/result1.png')
 filters.apply_filter(image_gray, filter2, '../gallery/result2.png')
 filters.apply_filter(image_gray, filter3, '../gallery/result3.png')
 filters.apply_filter(image, filter3, '../gallery/result4.png')
+
+#########################################
+#Problem 4
+noisen_image = imread('../data/DL04_Img2 (2).jpg', IMREAD_COLOR)
+filters.apply_filter(noisen_image, filter1, '../gallery/mean1.png')
+filters.apply_filter(noisen_image, filter2, '../gallery/mean2.png')
+filters.apply_filter(noisen_image, filter3, '../gallery/mean3.png')
+filters.apply_filter(noisen_image, filter3, '../gallery/median1.png', 'median', 3)
+filters.apply_filter(noisen_image, filter3, '../gallery/median2.png', 'median', 5)

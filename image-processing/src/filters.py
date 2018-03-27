@@ -1,6 +1,6 @@
 import cv2
 
-def apply_filter(image, filter, filepath):
+def apply_filter(image, filter, filepath, type=None, noise=None):
     """Apply filter to image.
 
     Keyword arguments:
@@ -9,5 +9,8 @@ def apply_filter(image, filter, filepath):
     filepath   -- path where image will be save
     """
 
-    result = cv2.filter2D(image, -1, filter)
+    if (type == None):
+        result = cv2.filter2D(image, -1, filter)
+    elif (type == 'median'):
+        result = cv2.medianBlur(image,noise)
     cv2.imwrite(filepath, result)
