@@ -7,7 +7,7 @@
 //Questao 1
 double f (double x){
     //f (x) = x 3 + 4.6x 2 + 1.6x − 7.2
-    return ((double) std::pow(x, (double)3) + (double) 4.6*std::pow(x, (double) 2) + (double) 1.6*x - (double) 7.2);
+    return ( std::pow(x, 3.0) + 4.6*std::pow(x, 2.0) + 1.6*x - 7.2);
 }
 
 /**
@@ -19,7 +19,7 @@ double f (double x){
 double bissecao( double(*func)(double ), double a, double b){
     double m = (a+b)/2.0;
 
-    while( std::abs( 0.0 - func(m)) > std::pow(10, -5) ){
+    while( std::abs( func(m)) > std::pow(10, -5) ){
 
         if( func(a)*func(m) < 0){
             b = m;
@@ -37,24 +37,24 @@ double bissecao( double(*func)(double ), double a, double b){
 //Questao 2
 double g( double x){
     // f (x) =x 3 − 1.7x 2 − 12.78x − 10.08
-    return ((double) std::pow(x, (double)3.0) - (double) 1.7*std::pow(x, (double) 2.0) - (double) 12.78*x - (double) 10.08);
+    return (std::pow(x, 3.0) - 1.7*std::pow(x,2.0) -  12.78*x - 10.08);
 }
 
 double gPrime(double x){
     //Checa se o limite é determinado
-    return ((double) 3.0 * std::pow(x, (double)2) - (double) 3.4*x - (double) 12.78);
+    return (3.0 * std::pow(x, 2.0) - 3.4*x - 12.78);
 }
 
 double newton(double(*func)(double ), double(*funcPrime)(double), double x){
     
     //xk+1 = xk - (fun(xk)/func1(xk))
     auto xk = x - (func(x)/funcPrime(x));
-    while( std::abs(func(xk) - func(x)) > std::pow(10.0, -5.0) ){
+    while( std::abs(xk - x) > std::pow(10.0, -5.0) ){
         x = xk;
         xk = x - (func(x)/funcPrime(x));
     }
 
-    double erro = std::abs(func(xk) - func(x));
+    double erro = std::abs(xk - x);
     std::cout << std::fixed;
     std::cout <<  std::setprecision(10) << "Erro = "<< erro << std::endl;
 
@@ -65,10 +65,10 @@ double newton(double(*func)(double ), double(*funcPrime)(double), double x){
 double s( double t ){
     //s(t) = s0 − (mg/k) t + ((m^2*g) / (k^2))*(1-e^(-kt/m))
     //g = 32.17, s0 = 300, m = 0.25, k = 0.1
-    double a = (double) (std::pow(0.25, 2.0)*32.17)/0.01;
-    double b = 1.0 - std::pow( (double) std::exp(1.0) , -0.4*t);
+    double a = (std::pow(0.25, 2.0)*32.17)/0.01;
+    double b = 1.0 - std::pow(std::exp(1.0) , -0.4*t);
 
-    return (double)300.0 - (double) 80.425*t + (double) a*b;
+    return (300.0 -  80.425*t + a*b);
 }
 
 double sPrime( double t) {
