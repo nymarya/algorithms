@@ -79,6 +79,8 @@ double sPrime( double t) {
 int main(  ) {
     
     //questao 1
+    std::cout << ">>> Questão 1\n";
+    std::cout << ">>> Método da bisseção\n";
     double raiz = bissecao(f, -3.333333, 0.3);
     std::cout << "Raiz: " << raiz << std::endl;
     raiz = bissecao(f, -10.01, -2.8);
@@ -87,7 +89,8 @@ int main(  ) {
     std::cout << "Raiz: " << raiz << std::endl;
 
     //questao 2
-    std::cout << ">>>Método de Newton\n";
+    std::cout << ">>> Questão 2\n";
+    std::cout << ">>> Método de Newton\n";
     raiz = newton(g,gPrime, -4.0);
     std::cout << "Raiz: " << raiz << std::endl;
     raiz = newton(g,gPrime, 1.0);
@@ -95,9 +98,11 @@ int main(  ) {
     raiz = newton(g,gPrime, 3.0);
     std::cout << "Raiz: " << raiz << std::endl;
 
+    //questao 3
+    std::cout << ">>> Questão 3\n";
+    std::cout << ">>> Método de Newton\n";
     raiz = newton(s, sPrime, 7.06);
-    std::cout << raiz<< std::endl;
-    std::cout << s(raiz) <<std::endl;
+    std::cout << "Raiz: " << raiz << std::endl;
 
     return EXIT_SUCCESS;
 }
