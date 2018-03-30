@@ -1,10 +1,13 @@
 #include <iostream>
 #include <cmath>
+#include <cassert>
+#include <iomanip> 
+#include <typeinfo>
 
 //Questao 1
-float f (float x){
+double f (double x){
     //f (x) = x 3 + 4.6x 2 + 1.6x − 7.2
-    return ((float) std::pow(x, (float)3) + (float) 4.6*std::pow(x, (float) 2) + (float) 1.6*x - (float) 7.2);
+    return ((double) std::pow(x, (double)3) + (double) 4.6*std::pow(x, (double) 2) + (double) 1.6*x - (double) 7.2);
 }
 
 /**
@@ -13,10 +16,10 @@ float f (float x){
  * @param a Início do intervalo inicial.
  * @param b Fim do intervalo inicial.
  */
-float bissecao( float(*func)(float ), float a, float b){
-    float m = (a+b)/2.0;
+double bissecao( double(*func)(double ), double a, double b){
+    double m = (a+b)/2.0;
 
-    for( int i =0; i < 10000; i++){
+    while( std::abs( 0.0 - func(m)) > std::pow(10, -5) ){
 
         if( func(a)*func(m) < 0){
             b = m;
@@ -32,42 +35,51 @@ float bissecao( float(*func)(float ), float a, float b){
 
 
 //Questao 2
-float g( float x){
+double g( double x){
     // f (x) =x 3 − 1.7x 2 − 12.78x − 10.08
-    return ((float) std::pow(x, (float)3) - (float) 1.7*std::pow(x, (float) 2) - (float) 12.78*x - (float) 10.08);
+    return ((double) std::pow(x, (double)3.0) - (double) 1.7*std::pow(x, (double) 2.0) - (double) 12.78*x - (double) 10.08);
 }
 
-float gPrime(float x){
+double gPrime(double x){
     //Checa se o limite é determinado
-    return ((float) 3.0 * std::pow(x, (float)2) - (float) 3.4*x - (float) 12.78);
+    return ((double) 3.0 * std::pow(x, (double)2) - (double) 3.4*x - (double) 12.78);
 }
 
-float newton(float(*func)(float ), float(*func1)(float), float x){
+double newton(double(*func)(double ), double(*funcPrime)(double), double x){
     
     //xk+1 = xk - (fun(xk)/func1(xk))
-    auto xk = x - (func(x)/func1(x));
-    while( std::abs(xk - x)/std::abs(xk) > std::pow(10.0, -3.0) ){
+    auto xk = x - (func(x)/funcPrime(x));
+    while( std::abs(func(xk) - func(x)) > std::pow(10.0, -5.0) ){
         x = xk;
-        xk = x - (func(x)/func1(x));
+        xk = x - (func(x)/funcPrime(x));
     }
+
+    double erro = std::abs(func(xk) - func(x));
+    std::cout << std::fixed;
+    std::cout <<  std::setprecision(10) << "Erro = "<< erro << std::endl;
 
     return xk;
 }
 
-const float euler = std::exp(1.0);
 //Questao 3
-float s( float t){
-    //s(t) = s0 − (mg/k)t + ((g*m^2)/k^2)*(1 - e^(-kt/m))
-    float a = 0.25 * 32.17)/0.1;
-    float b = std::pow(0.25, 2.0) * 32.17)/std::pow(0.1, 2.0);
-    float c = 1 - std::pow( euler , (-0.1 * t)/0.25);
-    return (300.0 - (a*t + (b *  c));
+double s( double t ){
+    //s(t) = s0 − (mg/k) t + ((m^2*g) / (k^2))*(1-e^(-kt/m))
+    //g = 32.17, s0 = 300, m = 0.25, k = 0.1
+    double a = (double) (std::pow(0.25, 2.0)*32.17)/0.01;
+    double b = 1.0 - std::pow( (double) std::exp(1.0) , -0.4*t);
+
+    return (double)300.0 - (double) 80.425*t + (double) a*b;
+}
+
+double sPrime( double t) {
+
+   return  (-80.425 + 80.425 * std::pow(std::exp(1.0), (-0.4*t)));
 }
 
 int main(  ) {
     
     //questao 1
-    float raiz = bissecao(f, -3.333333, 0.3);
+    double raiz = bissecao(f, -3.333333, 0.3);
     std::cout << "Raiz: " << raiz << std::endl;
     raiz = bissecao(f, -10.01, -2.8);
     std::cout << "Raiz: " << raiz << std::endl;
@@ -83,6 +95,9 @@ int main(  ) {
     raiz = newton(g,gPrime, 3.0);
     std::cout << "Raiz: " << raiz << std::endl;
 
+    raiz = newton(s, sPrime, 7.06);
+    std::cout << raiz<< std::endl;
+    std::cout << s(raiz) <<std::endl;
 
     return EXIT_SUCCESS;
 }
