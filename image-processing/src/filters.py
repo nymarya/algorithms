@@ -10,7 +10,6 @@ def apply_filter(image, filter, filepath, type=None, noise=None):
     filepath   -- path where image will be save
     """
 
-    bla = np.array([])
     if (type == None):
         result = cv2.filter2D(image, -1, filter)
     elif (type == 'median'):
