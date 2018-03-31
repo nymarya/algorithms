@@ -1,6 +1,6 @@
 import numpy as np
 from cv2 import imread, cvtColor, IMREAD_COLOR, IMREAD_GRAYSCALE, COLOR_BGR2GRAY, threshold
-from cv2 import THRESH_BINARY, imwrite, rectangle
+from cv2 import THRESH_BINARY, imwrite, rectangle, putText, FONT_HERSHEY_PLAIN, LINE_AA
 import convolution as conv
 import filters
 from skimage.filters import threshold_otsu
@@ -75,13 +75,19 @@ filters.apply_filter(noisen_image, filter3, '../gallery/median2.png', 'median', 
 # Problem 5
 
 #Detectin edges
-map = imread('../data/DL04_Img3.jpg', IMREAD_GRAYSCALE)
-filters.apply_filter(map, [], '../gallery/map-sobel.png', 'sobel')
-filters.apply_filter(map, [], '../gallery/map-laplace.png', 'laplace')
-filters.apply_filter(map, [], '../gallery/map-canny.png', 'canny')
+map = imread('../data/DL04_Img3.jpg', IMREAD_COLOR)
+map_gray = cvtColor(map, COLOR_BGR2GRAY)
+filters.apply_filter(map_gray, [], '../gallery/map-sobel.png', 'sobel')
+filters.apply_filter(map_gray, [], '../gallery/map-laplace.png', 'laplace')
+filters.apply_filter(map_gray, [], '../gallery/map-canny.png', 'canny')
 
-map1 = imread('../gallery/map-laplace.png', IMREAD_GRAYSCALE)
-r, thresh1 = threshold(map,50,255,THRESH_BINARY)
+map_canny = imread('../gallery/map-canny.png', IMREAD_COLOR)
+for i in range(len(map_gray)):
+    for j in range(len(map_gray[0])):
+        if( 230 <= map_gray[i][j] <= 255 ):
+            map_gray[i][j] = 0
+            
+r, thresh1 = threshold(map_gray,50,255,THRESH_BINARY)
 imwrite('../gallery/thresh.png', thresh1)
 regions = regionprops(thresh1)
 
@@ -93,24 +99,34 @@ for region in regions:
     if region.area >= 100:
         # draw rectangle around segmented coins
         minr, minc, maxr, maxc = region.bbox
-        rectangle(map,(minr,minc),(maxc - minc, maxr - minr),(200,255,200),2)
 
 
 imwrite('../gallery/regions.png', map)
-
+print(country_area)
 #segmentation
 regions = filters.segmentation_region(map, '../gallery/')
+teste = 0
 for (n,img) in enumerate(regions):
     filters.apply_filter(img, [], '../gallery/map'+str(n)+'-laplace.png', 'laplace')
     img_gray = cvtColor(img, COLOR_BGR2GRAY)
-    r, thresh1 = threshold(img_gray,50,255,THRESH_BINARY)
-    imwrite('../gallery/thresh'+str(n)+'.png', thresh1)
-    components = regionprops(thresh1)
+    r, thresh = threshold(img_gray,50,255,THRESH_BINARY)
+    imwrite('../gallery/thresh'+str(n)+'.png', thresh)
+    components = regionprops(thresh)
     for region in components:
-    # take regions with large enough areas 
+        # take regions with large enough areas 
+        state_area = region.area
+        percent_area = state_area*100 / country_area
+        teste += percent_area
         if region.area >= 100:
-        # draw rectangle around segmented  coins
+            # draw rectangle around segmented states
             minr, minc, maxr, maxc= region.bbox
-            rectangle(img,(minc,minr),(maxc, maxr),(200,255,200),2)
+            rectangle(map,(minc,minr),(maxc, maxr),(200,255,200),2)
+            
+            # write percentual area
+            col = int((minc+maxc)/2)
+            row = int((minr+maxr)/2)
+            putText(map, "{:.2f}".format(percent_area)+'%',(col, row), FONT_HERSHEY_PLAIN, 1,(255,9,255))
+            
+imwrite('../gallery/final.png', map)
 
-    imwrite('../gallery/regions'+str(n)+'.png', img)
+print(teste)
