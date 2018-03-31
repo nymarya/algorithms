@@ -4,9 +4,9 @@
 #include <fstream>
 #include <sstream>
 
-std::vector<float> read(std::string filename, size_t &order){
+std::vector<std::vector<float> > read(std::string filename, size_t &order){
 
-	std::vector<float> matrix;
+	std::vector<std::vector<float> > matrix;
 
 	//<! abre o arquivo contendo a a matriz
 	std::fstream file;
@@ -21,25 +21,21 @@ std::vector<float> read(std::string filename, size_t &order){
         //<! Guarda a ordem da matriz
         stream >> order;
 
-        int i = 0;
-        while( file.get() != EOF )
-        {
-            file.unget();
+		matrix.resize(order);
+		for ( int i = 0 ; i < order ; i++ )
+   			matrix[i].resize(order+1);
 
-            getline(file, line);
-        	std::stringstream stream(line);
 
-        	std::cout << line << std::endl;
-                      
-            while ( true )
-			{
+		for (int i=0; i < order; i++){
+			getline(file, line);
+        	std::stringstream stream(line);  
+
+			for(int j =0; j <order +1;j++){
 				float number = 0.0;
 				stream >> number;
-				matrix.push_back(number);
-
-				if (!stream) break;
-			}
-        }
+				matrix[i][j] = number;
+			} 
+		}
     }
     file.close();
 
@@ -54,7 +50,7 @@ int main(){
 
 	for (auto i=0u; i< order; i++) {
 		for(auto j = 0u; j< order+1; j++){
-			std::cout << m[i*order+ j] << " ";
+			std::cout << m[i][j] << " ";
 		}
 
 		std::cout << std::endl;
