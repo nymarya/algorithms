@@ -1,13 +1,9 @@
 import numpy as np
-from cv2 import imread, cvtColor, IMREAD_COLOR, IMREAD_GRAYSCALE, COLOR_BGR2GRAY, threshold
-from cv2 import THRESH_BINARY, imwrite, rectangle, putText, FONT_HERSHEY_PLAIN, LINE_AA
+from cv2 import COLOR_BGR2GRAY, IMREAD_COLOR, IMREAD_GRAYSCALE, FONT_HERSHEY_PLAIN, THRESH_BINARY
+from cv2 import cvtColor, imread, imwrite, rectangle, putText, threshold
 import convolution as conv
 import filters
-from skimage.filters import threshold_otsu
-from skimage.segmentation import clear_border
-from skimage.measure import label, regionprops
-from skimage.morphology import closing, square
-from skimage.color import label2rgb
+from skimage.measure import regionprops
 
 
 face = imread('../data/dsc07348.jpg', IMREAD_COLOR)
@@ -102,10 +98,9 @@ for region in regions:
 
 
 imwrite('../gallery/regions.png', map)
-print(country_area)
+
 #segmentation
 regions = filters.segmentation_region(map, '../gallery/')
-teste = 0
 for (n,img) in enumerate(regions):
     filters.apply_filter(img, [], '../gallery/map'+str(n)+'-laplace.png', 'laplace')
     img_gray = cvtColor(img, COLOR_BGR2GRAY)
@@ -116,7 +111,6 @@ for (n,img) in enumerate(regions):
         # take regions with large enough areas 
         state_area = region.area
         percent_area = state_area*100 / country_area
-        teste += percent_area
         if region.area >= 100:
             # draw rectangle around segmented states
             minr, minc, maxr, maxc= region.bbox
@@ -129,4 +123,3 @@ for (n,img) in enumerate(regions):
             
 imwrite('../gallery/final.png', map)
 
-print(teste)
