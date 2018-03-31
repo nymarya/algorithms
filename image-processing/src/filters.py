@@ -10,7 +10,6 @@ def apply_filter(image, filter, filepath, type=None, noise=None):
     filepath   -- path where image will be save
     """
 
-    bla = np.array([])
     if (type == None):
         result = cv2.filter2D(image, -1, filter)
     elif (type == 'median'):
@@ -20,7 +19,7 @@ def apply_filter(image, filter, filepath, type=None, noise=None):
     elif (type == 'sobel'):
         result = cv2.Sobel(image,cv2.CV_64F,0,1,ksize=3)
     elif (type == 'canny'):
-        result = cv2.Canny(image,30,200)
+        result = cv2.Canny(image,100,200)
         
     cv2.imwrite(filepath, result)
     return result
@@ -31,7 +30,7 @@ def segmentation_region(image, filepath):
     # first is lower bound and second upper bound
     boundaries = [
     	([0, 120, 120], [30, 255, 255]), #Norte
-    	([0, 120, 0], [20, 255, 20]), # Nordeste
+    	([0, 120, 0], [20, 255, 80]), # Nordeste
     	([0, 0, 140], [20, 40, 255]), # Centro-Oeste
     	([120, 0, 0], [255, 100, 100]), #Suldeste
     	([120, 120, 0], [255, 255, 50]) #Sul
@@ -59,11 +58,14 @@ def segmentation_region(image, filepath):
     
     return images
  
-#ref: https://www.pyimagesearch.com/2014/09/15/python-compare-two-images/
 def mse(image1, image2):
-	# the 'Mean Squared Error' between the two images is the
-	# sum of the squared difference between the two images;
-	# NOTE: the two images must have the same dimension
+	"""Calculate Mean Square Error
+
+    Keyword arguments:
+    image1     -- matrix with image 
+    image2     -- matrix with image 
+    """
+    
 	error = ((image1 - image2) ** 2).mean(axis=None)
 	
 	return error
