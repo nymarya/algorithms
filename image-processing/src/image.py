@@ -1,32 +1,15 @@
 import numpy as np
-from cv2 import COLOR_BGR2GRAY, IMREAD_COLOR, IMREAD_GRAYSCALE, FONT_HERSHEY_PLAIN, THRESH_BINARY
-from cv2 import cvtColor, imread, imwrite, rectangle, putText, threshold, blur
+from cv2 import COLOR_BGR2GRAY, IMREAD_COLOR, IMREAD_GRAYSCALE, FONT_HERSHEY_PLAIN, THRESH_BINARY, THRESH_OTSU
+from cv2 import cvtColor, imread, imwrite, rectangle, putText, threshold, blur, GaussianBlur
+from cv2 import ADAPTIVE_THRESH_GAUSSIAN_C, adaptiveThreshold
 import convolution as conv
 import filters
 from skimage.measure import regionprops
-from sklearn.metrics import mean_squared_error
-
-
-face = imread('../data/dsc07348.jpg', IMREAD_COLOR)
-faceGray = imread('../data/dsc07348.jpg', IMREAD_GRAYSCALE)
-filtroPassaAlta = np.array([[-1,-1,-1],[-1,8,-1],[-1,-1,-1]], dtype=np.float32)
-filtroPassaAlta2 = np.array([
-    [-1,-1,-1, -1, -1],
-    [-1,-1,-1, -1, -1],
-    [-1,-1,24, -1, -1],
-    [-1,-1,-1, -1, -1],
-    [-1,-1,-1, -1, -1]
-    ], dtype=np.float32)
-filterDetector = np.array([[1,0,-1],[1,  0,-1],[1,0,-1]], dtype=np.float32)
-
-filters.apply_filter(face, filtroPassaAlta, '../gallery/image1.png')
-filters.apply_filter(faceGray, filtroPassaAlta, '../gallery/image2.png')
-filters.apply_filter(face, filtroPassaAlta2, '../gallery/image3.png')
-filters.apply_filter(faceGray, filtroPassaAlta2, '../gallery/image4.png')
-filters.apply_filter(face, filterDetector, '../gallery/image5.png')
-filters.apply_filter(faceGray, filterDetector, '../gallery/image6.png')
-filters.apply_filter(face,  np.transpose(filterDetector), '../gallery/image7.png')
-filters.apply_filter(faceGray,  np.transpose(filterDetector), '../gallery/image8.png')
+from skimage.filters import threshold_otsu
+from skimage.segmentation import clear_border
+from skimage.measure import label, regionprops
+from skimage.morphology import closing, square
+from skimage.color import label2rgb
 
 ###########################################
 ## Problem 1
@@ -108,10 +91,11 @@ for i in range(len(map_gray)):
     for j in range(len(map_gray[0])):
         border_canny = map_canny[i][j] != 0
         border_laplace = 230 <= map_laplace[i][j] <= 255
-        border_sobel = 200 <= map_sobel[i][j] <= 255
-        if( (230 <= map_gray[i][j] <= 255) or (border_canny) or border_laplace or border_sobel ):
+        border_sobel = 230 <= map_sobel[i][j] <= 255
+        if( (230 <= map_gray[i][j] <= 255) or border_laplace  ):
             map_gray[i][j] = 0
         
+#total area
 r, thresh1 = threshold(map_gray,50,255,THRESH_BINARY)
 imwrite('../gallery/thresh.png', thresh1)
 regions = regionprops(thresh1)
@@ -125,32 +109,52 @@ for region in regions:
         # draw rectangle around segmented coins
         minr, minc, maxr, maxc = region.bbox
 
-
-imwrite('../gallery/regions.png', map)
-
 #segmentation
 regions = filters.segmentation_region(map, '../gallery/')
+
+new_map = np.zeros((len(map)+100, len(map[0])+100, 3), dtype=np.uint8)
+diff = [[0,0], [0,50],[70, -10],[40, 70],[70,30]]
+for x in range(0,5):
+    map_lap = filters.apply_filter(regions[x], [], '../gallery/map'+str(x)+'-laplace.png', 'laplace')
+    for i in range(0, len(regions[x])):
+        for j in range(0, len(regions[x][0])):
+            r = regions[x][i][j][0]
+            g = regions[x][i][j][1] 
+            b = regions[x][i][j][2]
+            border = map_lap[i][j]
+            if( r != 0 or g!= 0 or b!=0 ):
+                new_map[i + diff[x][0]][j + diff[x][1]] = regions[x][i][j]
+            elif( border[0] != 0 and border[1] != 0 and border[2] != 0):
+                new_map[i + diff[x][0]][j + diff[x][1]] = border
+            
+
+new_map_gray = cvtColor(new_map, COLOR_BGR2GRAY)
+new_map_gray = GaussianBlur(new_map_gray,(5,5),0)
+r, new_thresh = threshold(new_map_gray,50,255,THRESH_BINARY)
+
+#ref: http://scikit-image.org/docs/dev/auto_examples/segmentation/plot_label.html
+bw = closing(new_map_gray > 50, square(3))
+
+# remove artifacts connected to image border
+cleared = clear_border(bw)
+
+# label image regions
+label_image = label(cleared)
+
 p = 0.0
-for (n,img) in enumerate(regions):
-    filters.apply_filter(img, [], '../gallery/map'+str(n)+'-laplace.png', 'laplace')
-    img_gray = cvtColor(img, COLOR_BGR2GRAY)
-    r, thresh = threshold(img_gray,50,255,THRESH_BINARY)
-    imwrite('../gallery/thresh'+str(n)+'.png', thresh)
-    components = regionprops(thresh)
-    for region in components:
-        # take regions with large enough areas 
-        state_area = region.area
-        percent_area = state_area*100 / country_area
-        p+= percent_area
-        if region.area >= 100:
-            # draw rectangle around segmented states
-            minr, minc, maxr, maxc= region.bbox
-            rectangle(map,(minc,minr),(maxc, maxr),(255,9,255),2)
-            
-            # write percentual area
-            col = int((minc+maxc)/2)
-            row = int((minr+maxr)/2)
-            putText(map, "{:.2f}".format(percent_area)+'%',(col, row), FONT_HERSHEY_PLAIN, 1,(200,255,200))
-            
-imwrite('../gallery/final.png', map)
-print(p)
+for region in regionprops(label_image):
+    state_area = region.area
+    percent_area = state_area*100 / country_area
+    p+= percent_area
+    if region.area >= 100:
+        # draw rectangle around segmented regions
+        minr, minc, maxr, maxc = region.bbox
+        rectangle(new_map,(minc,minr),(maxc, maxr),(255,9,255),2)
+        
+        # write percentual area
+        col = int((minc+maxc)/2)-50
+        row = int((minr+maxr)/2)
+        putText(new_map, "{:.2f}".format(percent_area)+'%',(col, row), FONT_HERSHEY_PLAIN, 1.5,(200,200,200), 2)
+              
+#imwrite('../gallery/regions.png', new_map)
+imwrite('../gallery/final.png', new_map)
