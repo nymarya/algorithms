@@ -5,6 +5,8 @@ import convolution as conv
 import filters
 from skimage.measure import regionprops
 from sklearn.metrics import mean_squared_error
+import conv2d
+from scipy import signal
 
 
 face = imread('../data/dsc07348.jpg', IMREAD_COLOR)
@@ -41,6 +43,34 @@ print(conv.linear_conv(array1,array2))
 
 print(np.convolve(array2, array1))
 print(conv.linear_conv(array2,array1))
+
+#########################################
+#Problem 2
+ar1 = np.array([
+	[8, 5, 8, 1, 6, 8, 7],
+	[9, 9, 2, 8, 2, 7, 8],
+	[2, 9, 4, 9, 7, 3, 2],
+	[9, 2, 9, 7, 1, 9, 5],
+	[6, 9, 8, 7, 3, 1, 5],
+	[1, 9, 9, 7, 1, 4, 6],
+	[3, 5, 6, 4, 1, 4, 7]])
+
+ar2 = np.array([
+	[3,2,2],
+	[1,1,3],
+	[3,1,2]])
+
+print(signal.convolve2d(ar1, ar2, 'full'))
+print(conv2d.linear_conv2d(ar1,ar2))
+
+print(signal.convolve2d(ar2, ar1, 'full'))
+print(conv2d.linear_conv2d(ar2,ar1))
+
+print(signal.convolve2d(ar1, ar2, 'same'))
+print(conv2d.linear_conv2d(ar1,ar2, 'same'))
+
+print(signal.convolve2d(ar2, ar1, 'same'))
+print(conv2d.linear_conv2d(ar2,ar1, 'same'))
 
 
 #########################################
