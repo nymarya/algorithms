@@ -1,9 +1,10 @@
 import numpy as np
 from cv2 import COLOR_BGR2GRAY, IMREAD_COLOR, IMREAD_GRAYSCALE, FONT_HERSHEY_PLAIN, THRESH_BINARY
-from cv2 import cvtColor, imread, imwrite, rectangle, putText, threshold
+from cv2 import cvtColor, imread, imwrite, rectangle, putText, threshold, blur
 import convolution as conv
 import filters
 from skimage.measure import regionprops
+from sklearn.metrics import mean_squared_error
 
 
 face = imread('../data/dsc07348.jpg', IMREAD_COLOR)
@@ -59,13 +60,39 @@ filters.apply_filter(image, filter3, '../gallery/result4.png')
 
 #########################################
 #Problem 4
-noisen_image = imread('../data/DL04_Img2 (2).jpg', IMREAD_COLOR)
-filters.apply_filter(noisen_image, filter1, '../gallery/mean1.png')
-filters.apply_filter(noisen_image, filter2, '../gallery/mean2.png')
-filters.apply_filter(noisen_image, filter3, '../gallery/mean3.png')
-filters.apply_filter(noisen_image, filter3, '../gallery/median1.png', 'median', 3)
-filters.apply_filter(noisen_image, filter3, '../gallery/median2.png', 'median', 5)
+noisen = imread('../data/DL04_Img2 (2).jpg', IMREAD_COLOR)
+smooth_image = imread('../data/DL04_Img2 (1).jpg', IMREAD_COLOR)
+noisen_image = np.array(smooth_image, dtype=np.uint8)
+#make matrices with same shape
+for i in range(3, 213):
+    for j in range(3, 270):
+        noisen_image[i-3][j-3] = noisen[i][j] 
+        
+error = filters.mse(smooth_image, smooth_image)
+print(" erro teste  " + str(error))
+filter5 = np.array([[1.0/25.0 for x in range(0, 5)] for y in range(0, 5)], dtype=np.float32)
 
+mean1 = filters.apply_filter(noisen_image, filter1, '../gallery/mean1.png')
+error = filters.mse(smooth_image, mean1)
+print(" erro media 1: " + str(error))
+mean2 = filters.apply_filter(noisen_image, filter5, '../gallery/mean2.png')
+error = filters.mse(smooth_image, mean2)
+print(" erro media 2: " + str(error))
+mean3 = filters.apply_filter(noisen_image, filter2, '../gallery/mean3.png')
+error = filters.mse(smooth_image, mean3)
+print(" erro media 3: " + str(error))
+mean4 = filters.apply_filter(noisen_image, filter3, '../gallery/mean4.png')
+error = filters.mse(smooth_image, mean4)
+print(" erro media 3: " + str(error))
+median1 = filters.apply_filter(noisen_image, filter3, '../gallery/median1.png', 'median', 3)
+error = filters.mse(smooth_image, median1)
+print(" erro mediana 1: " + str(error))
+median2 = filters.apply_filter(noisen_image, filter3, '../gallery/median2.png', 'median', 5)
+error = filters.mse(smooth_image, median2)
+print(" erro mediana 2: " + str(error))
+median3 = filters.apply_filter(noisen_image, filter3, '../gallery/median3.png', 'median', 7)
+error = filters.mse(smooth_image, median3)
+print(" erro mediana 3: " + str(error))
 
 #########################################
 # Problem 5
@@ -73,16 +100,18 @@ filters.apply_filter(noisen_image, filter3, '../gallery/median2.png', 'median', 
 #Detectin edges
 map = imread('../data/DL04_Img3.jpg', IMREAD_COLOR)
 map_gray = cvtColor(map, COLOR_BGR2GRAY)
-filters.apply_filter(map_gray, [], '../gallery/map-sobel.png', 'sobel')
-filters.apply_filter(map_gray, [], '../gallery/map-laplace.png', 'laplace')
-filters.apply_filter(map_gray, [], '../gallery/map-canny.png', 'canny')
+map_sobel = filters.apply_filter(map_gray, [], '../gallery/map-sobel.png', 'sobel')
+map_laplace = filters.apply_filter(map_gray, [], '../gallery/map-laplace.png', 'laplace')
+map_canny = filters.apply_filter(map_gray, [], '../gallery/map-canny.png', 'canny')
 
-map_canny = imread('../gallery/map-canny.png', IMREAD_COLOR)
 for i in range(len(map_gray)):
     for j in range(len(map_gray[0])):
-        if( 230 <= map_gray[i][j] <= 255 ):
+        border_canny = map_canny[i][j] != 0
+        border_laplace = 230 <= map_laplace[i][j] <= 255
+        border_sobel = 200 <= map_sobel[i][j] <= 255
+        if( (230 <= map_gray[i][j] <= 255) or (border_canny) or border_laplace or border_sobel ):
             map_gray[i][j] = 0
-            
+        
 r, thresh1 = threshold(map_gray,50,255,THRESH_BINARY)
 imwrite('../gallery/thresh.png', thresh1)
 regions = regionprops(thresh1)
@@ -101,6 +130,7 @@ imwrite('../gallery/regions.png', map)
 
 #segmentation
 regions = filters.segmentation_region(map, '../gallery/')
+p = 0.0
 for (n,img) in enumerate(regions):
     filters.apply_filter(img, [], '../gallery/map'+str(n)+'-laplace.png', 'laplace')
     img_gray = cvtColor(img, COLOR_BGR2GRAY)
@@ -111,15 +141,16 @@ for (n,img) in enumerate(regions):
         # take regions with large enough areas 
         state_area = region.area
         percent_area = state_area*100 / country_area
+        p+= percent_area
         if region.area >= 100:
             # draw rectangle around segmented states
             minr, minc, maxr, maxc= region.bbox
-            rectangle(map,(minc,minr),(maxc, maxr),(200,255,200),2)
+            rectangle(map,(minc,minr),(maxc, maxr),(255,9,255),2)
             
             # write percentual area
             col = int((minc+maxc)/2)
             row = int((minr+maxr)/2)
-            putText(map, "{:.2f}".format(percent_area)+'%',(col, row), FONT_HERSHEY_PLAIN, 1,(255,9,255))
+            putText(map, "{:.2f}".format(percent_area)+'%',(col, row), FONT_HERSHEY_PLAIN, 1,(200,255,200))
             
 imwrite('../gallery/final.png', map)
-
+print(p)

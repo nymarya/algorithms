@@ -10,6 +10,7 @@ def apply_filter(image, filter, filepath, type=None, noise=None):
     filepath   -- path where image will be save
     """
 
+    bla = np.array([])
     if (type == None):
         result = cv2.filter2D(image, -1, filter)
     elif (type == 'median'):
@@ -19,9 +20,10 @@ def apply_filter(image, filter, filepath, type=None, noise=None):
     elif (type == 'sobel'):
         result = cv2.Sobel(image,cv2.CV_64F,0,1,ksize=3)
     elif (type == 'canny'):
-        result = cv2.Canny(image,50,200)
+        result = cv2.Canny(image,30,200)
         
     cv2.imwrite(filepath, result)
+    return result
     
 def segmentation_region(image, filepath):
     
@@ -56,4 +58,13 @@ def segmentation_region(image, filepath):
     	i+=1
     
     return images
+ 
+#ref: https://www.pyimagesearch.com/2014/09/15/python-compare-two-images/
+def mse(image1, image2):
+	# the 'Mean Squared Error' between the two images is the
+	# sum of the squared difference between the two images;
+	# NOTE: the two images must have the same dimension
+	error = ((image1 - image2) ** 2).mean(axis=None)
+	
+	return error
     
