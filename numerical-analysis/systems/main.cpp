@@ -5,9 +5,9 @@
 #include <sstream>
 #include <algorithm>   // std::max_element
 
-std::vector<std::vector<float> > read(std::string filename, size_t &order){
+std::vector<std::vector<double> > read(std::string filename, size_t &order){
 
-	std::vector<std::vector<float> > matrix;
+	std::vector<std::vector<double> > matrix;
 
 	//<! abre o arquivo contendo a a matriz
 	std::fstream file;
@@ -44,35 +44,78 @@ std::vector<std::vector<float> > read(std::string filename, size_t &order){
 }
 
 std::vector<double> solve(std::vector<std::vector<double>> matrix){
-    std::vector<double> pivos(matrix[0].size(), -1);
-	for (int c=0; c < matrix[0].size(); c++){
-		double pivo = 0.0;
-		double l = 0.0;
+	//guarda a coluna em que o pivo de cada linha está
+	std::vector<int> pivots(matrix[0].size()-1, -1);
+	//matriz escalonada
+	std::vector<std::vector<double>> echelon_form(matrix);
+	//guarda a coluna em que o pivo de cada linha está
+	std::vector<double> solutions(matrix[0].size()-1, 0);
+
+	for (int c=0; c < matrix[0].size()-2; c++){
+		double pivot = 0.0;
+		int l = 0;
 
 		//procura pivo
 		for(int i=0; i < matrix.size(); i++){
-			if(std::abs(matrix[i][c]) > std::abs(pivo) ){
-				pivo = matrix[i][c];
+			if(std::abs(echelon_form[i][c]) > std::abs(pivot) && pivots[i]== -1){
+				pivot = echelon_form[i][c];
 				l = i;
 			}
 		}
-		pivos[l] = c;
+		pivots[l] = c;
+		std::cout << "p: " << pivot;
+		std::cout << "linha: " << l<< std::endl;
 
-		//calcula matriz 
-		std::vector<std::vector<double>> transformada(matrix);
+		//calcula matriz escalonada
 		for(int i=0; i < matrix.size(); i++){
 			//se a linha não for a do pivo
-			if(pivos[i] == -1){
+			if(pivots[i] == -1){
 				//calcula multiplicador
-			    double m = matrix[i][c] / pivo;
+				double m = echelon_form[i][c] / pivot;
+				std::cout << "m: " << m ;;
+				std::cout << "  linha: " << i <<std::endl;
 
 				for (int j = 0; j < matrix[i].size(); j++){
-					transformada[i][j] = matrix[i][j] - matrix[l][i]*m;
+					echelon_form[i][j] = echelon_form[i][j] - echelon_form[l][j]*m;
 				}
 			}
 			
-		}
+		}		
 	}
+	for (auto i=0u; i< matrix.size(); i++) {
+		for(auto j = 0u; j< 4; j++){
+			solutions[i] = echelon_form[i][ matrix[i].size()-1 ];
+		}
+
+	}
+
+	//coluna q contem o pivot
+	int column = solutions.size()-1;
+	for(int i=0; i< matrix[0].size()-1; i++){
+		//calcula vetor solução
+		int l = -1;
+		for (int x = 0; x< pivots.size(); x++){
+			if( pivots[x] == column || pivots[x] == -1){
+				l = x;
+			} 
+		}
+
+		std::cout << "pivot da coluna " <<column << " eh da linha " << l <<std::endl;
+		double sum = 0.0;
+		for(int j = column; j < matrix[0].size()-1; j++){
+			std::cout << "c:" << j <<std::endl;
+			std::cout << "s: " << echelon_form[l][j] <<std::endl;
+			sum += echelon_form[l][j] * solutions[j];
+		} 
+		
+		solutions[column] = (echelon_form[l][matrix[0].size()-1] - sum)/echelon_form[l][column];
+
+		column--;
+	}
+
+	
+	
+	return solutions;
 }
 
 
@@ -88,6 +131,15 @@ int main(){
 
 		std::cout << std::endl;
 	}
+
+	auto s = solve(m);
+	std::cout << "AAAA\n";
+	for(auto j = 0u; j< order; j++){
+		std::cout << s[j] << " ";
+	}
+
+	std::cout << std::endl;
+	
 
 	return EXIT_SUCCESS;
 
