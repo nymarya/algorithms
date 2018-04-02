@@ -76,6 +76,22 @@ double sPrime( double t) {
    return  (-80.425 + 80.425 * std::pow(std::exp(1.0), (-0.4*t)));
 }
 
+double h( double x ){
+
+    double a = std::sqrt ( 400.0 - std::pow(x, 2.0) );
+    double b = std::sqrt ( 900.0 - std::pow(x, 2.0) );
+
+    return ( 1/a + 1/b - 1.0/8.0);
+}
+
+double hPrime( double x ){
+
+    double a = std::pow (400.0 - std::pow(x, 2.0), 3/2 );
+    double b = std::pow (900.0 - std::pow(x, 2.0), 3/2 );
+
+    return x * ( 1/a + 1/b );
+}
+
 int main(  ) {
     
     //questao 1
@@ -102,6 +118,12 @@ int main(  ) {
     std::cout << ">>> Questão 3\n";
     std::cout << ">>> Método de Newton\n";
     raiz = newton(s, sPrime, 7.06);
+    std::cout << "Raiz: " << raiz << std::endl;
+
+    //questao 4
+    std::cout << ">>> Questão 4\n";
+    std::cout << ">>> Método de Newton\n";
+    raiz = newton(h, hPrime, 1.05);
     std::cout << "Raiz: " << raiz << std::endl;
 
     return EXIT_SUCCESS;
