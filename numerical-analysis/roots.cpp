@@ -55,8 +55,7 @@ double newton(double(*func)(double ), double(*funcPrime)(double), double x){
     }
 
     double erro = std::abs(xk - x);
-    std::cout << std::fixed;
-    std::cout <<  std::setprecision(10) << "Erro = "<< erro << std::endl;
+    std::cout << "Erro = "<< erro << std::endl;
 
     return xk;
 }
@@ -81,7 +80,7 @@ int main(  ) {
     //questao 1
     std::cout << ">>> Questão 1\n";
     std::cout << ">>> Método da bisseção\n";
-    double raiz = bissecao(f, -3.333333, 0.3);
+    double raiz = bissecao(f, -3.333333, 0.7);
     std::cout << "Raiz: " << raiz << std::endl;
     raiz = bissecao(f, -10.01, -2.8);
     std::cout << "Raiz: " << raiz << std::endl;
@@ -89,6 +88,8 @@ int main(  ) {
     std::cout << "Raiz: " << raiz << std::endl;
 
     //questao 2
+    std::cout << std::fixed;
+    std::cout <<  std::setprecision(10);
     std::cout << ">>> Questão 2\n";
     std::cout << ">>> Método de Newton\n";
     raiz = newton(g,gPrime, -4.0);
