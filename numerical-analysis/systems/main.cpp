@@ -102,7 +102,7 @@ std::vector<double> solve(std::vector<std::vector<double>> matrix){
 
 		std::cout << "pivot da coluna " <<column << " eh da linha " << l <<std::endl;
 		double sum = 0.0;
-		for(int j = column; j < matrix[0].size()-1; j++){
+		for(int j = column+1; j < matrix[0].size()-1; j++){
 			std::cout << "c:" << j <<std::endl;
 			std::cout << "s: " << echelon_form[l][j] <<std::endl;
 			sum += echelon_form[l][j] * solutions[j];
