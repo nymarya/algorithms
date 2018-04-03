@@ -1,50 +1,11 @@
 #include <iostream>
-#include <string>
 #include <vector>
-#include <fstream>
-#include <sstream>
 #include <algorithm>   // std::max_element
 #include <cassert>
 #include <cmath>
 #include <iomanip> 
 
-std::vector<std::vector<double> > read(std::string filename, size_t &order){
-
-	std::vector<std::vector<double> > matrix;
-
-	//<! abre o arquivo contendo a a matriz
-	std::fstream file;
-    file.open(filename);
-
-    if(file.is_open()){
-
-        std::string line;
-        getline(file, line);
-        std::stringstream stream(line);
-        
-        //<! Guarda a ordem da matriz
-        stream >> order;
-
-		matrix.resize(order);
-		for ( int i = 0 ; i < order ; i++ )
-   			matrix[i].resize(order+1);
-
-
-		for (int i=0; i < order; i++){
-			getline(file, line);
-        	std::stringstream stream(line);  
-
-			for(int j =0; j <order +1;j++){
-				float number = 0.0;
-				stream >> number;
-				matrix[i][j] = number;
-			} 
-		}
-    }
-    file.close();
-
-    return matrix;
-}
+#include "reader.h"
 
 double norm(std::vector<double> x, std::vector<double> y){
 	double max= 0.0;
@@ -54,25 +15,27 @@ double norm(std::vector<double> x, std::vector<double> y){
 			max = diff;
 		}
 	}
+
+	return max;
 }
 
 std::vector<double> gaussian_elimination(std::vector<std::vector<double>> matrix){
 	//guarda a coluna em que o pivo de cada linha está
-	std::vector<int> pivots(matrix[0].size()-1, -1);
+	std::vector<std::size_t> pivots(matrix[0].size()-1, -1);
 	//matriz escalonada
 	std::vector<std::vector<double>> echelon_form(matrix);
 	//guarda a coluna em que o pivo de cada linha está
 	std::vector<double> solutions(matrix[0].size()-1, 0);
 
 	//coluna que contem as solucoes
-	int columns = matrix[0].size()-1;
+	auto columns = matrix[0].size()-1;
 
-	for (int c=0; c < columns-1; c++){
+	for (auto c=0u; c < columns-1; c++){
 		double pivot = 0.0;
 		int l = 0;
 
 		//procura pivo
-		for(int i=0; i < matrix.size(); i++){
+		for(auto i=0u; i < matrix.size(); i++){
 			if(std::abs(echelon_form[i][c]) > std::abs(pivot) && pivots[i]== -1){
 				pivot = echelon_form[i][c];
 				l = i;
@@ -81,14 +44,14 @@ std::vector<double> gaussian_elimination(std::vector<std::vector<double>> matrix
 		pivots[l] = c;
 
 		//calcula matriz escalonada
-		for(int i=0; i < matrix.size(); i++){
+		for(auto i=0u; i < matrix.size(); i++){
 			//se a linha não for a do pivo
 			if(pivots[i] == -1){
 				//calcula multiplicador
 				double m = echelon_form[i][c] / pivot;
 
 				//atualiza valores
-				for (int j = 0; j < matrix[i].size(); j++){
+				for (auto j = 0u; j < matrix[i].size(); j++){
 					echelon_form[i][j] = echelon_form[i][j] - echelon_form[l][j]*m;
 				}
 			}
@@ -102,11 +65,11 @@ std::vector<double> gaussian_elimination(std::vector<std::vector<double>> matrix
 	}
 
 	//coluna q contem o pivot
-	int column = solutions.size()-1;
-	for(int i=0; i< columns; i++){
+	auto column = solutions.size()-1;
+	for(auto i=0u; i< columns; i++){
 		//encontra a linha referente ao pivo
 		int l = -1;
-		for (int x = 0; x< pivots.size(); x++){
+		for (auto x = 0u; x< pivots.size(); x++){
 			if( pivots[x] == column){
 				l = x;
 				break;
@@ -117,7 +80,7 @@ std::vector<double> gaussian_elimination(std::vector<std::vector<double>> matrix
 
 		//calcula solução
 		double sum = 0.0;
-		for(int j = column+1; j < columns; j++){
+		for(auto j = column+1; j < columns; j++){
 			sum += echelon_form[l][j] * solutions[j];
 		} 
 		solutions[column] = (echelon_form[l][columns] - sum)/echelon_form[l][column];
@@ -150,33 +113,36 @@ std::vector<double> solve(std::vector<std::vector<double>> matrix ){
 	auto solution = gaussian_elimination(matrix);
 
 	
-	std::vector<double> b(matrix[0].size());
-	for (auto i=0u; i< matrix.size(); i++) {
+	std::vector<double> b(solution.size());
+	for (auto i=0u; i< b.size(); i++) {
 		b[i] = matrix[i][ matrix[i].size()-1 ];
 	}
 
-	auto result = solution;
-	do{
+	std::vector<double> result(solution);
 
-		//calcula Ax̄
-		auto ax = mult(matrix, result);
-		std::vector<double> r(solution);
-		
+	//calcula Ax' -> x' sendo o vetor solucao encontrado
+	auto ax = mult(matrix, result);
+	std::cout << "a: " <<norm(b, ax) <<std::endl;
+	while (norm(b, ax) > std::pow(10, -15)) {
+
 		//cria a matriz aumentada A|r
 		auto ar = matrix;
-		for( auto i=0u; i< r.size(); i++){
-			auto rest = b[i] - ax[i];
-			ar[i][ar[0].size()-1] = rest;
+		for( auto i=0u; i< ar.size(); i++){
+			ar[i][ar[0].size()-1] = b[i] - ax[i];
 		}
 
 		//resolve Ay = r
 		auto y = gaussian_elimination(ar);
 
-		//soma x̄ + y
+		// soma x' + y
 		for( auto i = 0u; i< y.size(); i++){
 			result[i] += y[i];
 		}
-	} while( norm(solution, result) > std::pow(10, -20));
+
+		//calcula novo Ax'
+		ax = mult(matrix, result);
+
+	}
 	
 	return result;
 }
