@@ -6,6 +6,7 @@
 #include <algorithm>   // std::max_element
 #include <cassert>
 #include <cmath>
+#include <iomanip> 
 
 std::vector<std::vector<double> > read(std::string filename, size_t &order){
 
@@ -159,10 +160,11 @@ std::vector<double> solve(std::vector<std::vector<double>> matrix ){
 
 		//calcula Ax̄
 		auto ax = mult(matrix, result);
+		std::vector<double> r(solution);
 		
 		//cria a matriz aumentada A|r
-		std::vector<std::vector<double>> ar (matrix);
-		for( auto i=0u; i< matrix.size(); i++){
+		auto ar = matrix;
+		for( auto i=0u; i< r.size(); i++){
 			auto rest = b[i] - ax[i];
 			ar[i][ar[0].size()-1] = rest;
 		}
@@ -172,7 +174,7 @@ std::vector<double> solve(std::vector<std::vector<double>> matrix ){
 
 		//soma x̄ + y
 		for( auto i = 0u; i< y.size(); i++){
-			result[i] = result[i]  + y[i];
+			result[i] += y[i];
 		}
 	} while( norm(solution, result) > std::pow(10, -20));
 	
@@ -186,32 +188,55 @@ int main(){
 	size_t order = 0;
 	auto m = read("data/m1.in", order);
 
-	auto s = solve(m);
-	std::cout << "AAAA\n";
+	auto s = gaussian_elimination(m);
+	std::cout << std::fixed;
+	std::cout <<  std::setprecision(20);
+
+
+	std::cout << "Matriz 1\n Sem refinamento  = [";
 	for(auto j = 0u; j< order; j++){
 		std::cout << s[j] << " ";
 	}
-	std::cout << std::endl;
+	std::cout <<"]\n";
 
-	auto teste = mult(m, s);
-	for (auto i=0u; i< order; i++) {
-		assert( teste[i] == m[i][order]);
+	std::cout << "Matriz 1\n Com refinamento  = [";
+	s = solve(m);
+	for(auto j = 0u; j< order; j++){
+		std::cout << s[j] << " ";
 	}
+	std::cout <<"]\n";
 	
+	//Matriz 5x5
 	m = read("data/m2.in", order);
-	s = solve(m);
-	std::cout << "AAAbA\n";
+	s = gaussian_elimination(m);
+	std::cout << "Matriz 2\n Sem refinamento  = [";
 	for(auto j = 0u; j< order; j++){
 		std::cout << s[j] << " ";
 	}
-	std::cout << std::endl;
+	std::cout <<"]\n";
 
-	m = read("data/m3.in", order);
+	std::cout << "Matriz 2\n Com refinamento  = [";
 	s = solve(m);
 	for(auto j = 0u; j< order; j++){
 		std::cout << s[j] << " ";
 	}
-	std::cout << std::endl;
+	std::cout <<"]\n";
+
+	//Matriz 80x80
+	m = read("data/m3.in", order);
+	s = gaussian_elimination(m);
+	std::cout << "Matriz 3\n Sem refinamento  = [";
+	for(auto j = 0u; j< order; j++){
+		std::cout << s[j] << " ";
+	}
+	std::cout <<"]\n";
+
+	std::cout << "Matriz 3\n Com refinamento  = [";
+	s = solve(m);
+	for(auto j = 0u; j< order; j++){
+		std::cout << s[j] << " ";
+	}
+	std::cout <<"]\n";
 
 	
 	
