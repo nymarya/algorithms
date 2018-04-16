@@ -30,7 +30,7 @@ def read ( ):
     resp_training_set = []
     for i in range(0, training_set_size):
         tuple_size = len(datasheet[i])
-        feautures = datasheet[i][0:tuple_size-2] 	
+        feautures = datasheet[i][0:tuple_size-1] 	
         training_set.append(feautures)
         resp_training_set.append(datasheet[i][tuple_size-1])
 
@@ -39,7 +39,7 @@ def read ( ):
     resp_test_set = []
     for i in range(training_set_size+1, total_records ):
         tuple_size = len(datasheet[i])
-        feautures = datasheet[i][0:tuple_size-2] 	
+        feautures = datasheet[i][0:tuple_size-1] 	
         test_set.append(feautures)
         resp_test_set.append(datasheet[i][tuple_size-1])
 

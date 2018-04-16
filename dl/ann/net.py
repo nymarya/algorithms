@@ -3,35 +3,23 @@ import numpy as np
 from sklearn.decomposition import PCA
 import cov
 import math
+import read
 
-#Load data from workbook
-wb1 = load_workbook('ConjTreino.xlsx')
-sheet1 = wb1[u'Sheet1']
+data = read.read()
 
-wb2 = load_workbook('ConjTeste.xlsx')
-sheet2 = wb2[u'Sheet1']
+data_training = data[0]
+y_training = np.array([ 1 if i==2 else 0 for i in data[1]])
+data_test = data[2]
+y_test = np.array([ 1 if i==2 else 0 for i in data[3]])
 
-#Recover data
-datasheet = []
-for row in sheet1.iter_rows(min_row=3, min_col=2, max_col=10):    
-    newRow = list() 
-    for cell in row:
-        newRow.append(cell.value)
-    datasheet.append(tuple(newRow))
-    
-#Transpose matrix so we can calculate both covariance and correlation matrix
-dados = np.array(datasheet)
 
 from sklearn.preprocessing import StandardScaler
-train_data_std = StandardScaler().fit_transform(dados)
+train_data_std = StandardScaler().fit_transform(data_training)
 
 #get covariance matrix
 #egenvalues and eigenvectors
 cov_mat = np.cov(train_data_std.T)
 eig_vals, eig_vecs = np.linalg.eig(cov_mat)
-
-print('Eigenvectors \n%s' %eig_vecs)
-print('\nEigenvalues \n%s' %eig_vals)
 
 for ev in eig_vecs:
     np.testing.assert_array_almost_equal(1.0, np.linalg.norm(ev))
@@ -42,18 +30,6 @@ eig_pairs = [(np.abs(eig_vals[i]), eig_vecs[:,i]) for i in range(len(eig_vals))]
 # Sort the (eigenvalue, eigenvector) tuples from high to low
 eig_pairs.sort()
 eig_pairs.reverse()
-
-# Visually confirm that the list is correctly sorted by decreasing eigenvalues
-print('Eigenvalues in descending order:')
-for i in eig_pairs:
-    print(i[0])
-
-tot = sum(eig_vals)
-cum_var_exp = 0.0
-for i in sorted(eig_vals, reverse=True):
-    var_exp = (i / tot)*100 
-    cum_var_exp += var_exp
-    print('var %f cumvar %f' %(var_exp, cum_var_exp))
 
 #reduce the dimension
 
@@ -66,39 +42,11 @@ matrix_w = np.hstack((eig_pairs[0][1].reshape(9,1),
                       eig_pairs[6][1].reshape(9,1),
                       ))
                       
-print('Matrix W:\n', matrix_w.shape)
 
-training_data = train_data_std.dot(matrix_w).astype('float32')
-print("training data shape: ", training_data.shape) 
-
-#Recover data
-datasheet = []
-for row in sheet2.iter_rows(min_row=3, min_col=2, max_col=10):    
-    newRow = list() 
-    for cell in row:
-        newRow.append(cell.value)
-    datasheet.append(tuple(newRow))
-
-test_data = np.array(datasheet) 
+X_training= train_data_std.dot(matrix_w).astype('float32')
   
-test_data_std = StandardScaler().fit_transform(test_data)
+test_data_std = StandardScaler().fit_transform(data_test)
 X_test = test_data_std.dot(matrix_w)
-
-## get target
-#treino
-datasheet = []
-for row in sheet1.iter_rows(min_row=3, min_col=12, max_col=12):     
-    for cell in row:
-        datasheet.append(cell.value)
-    
-y_train = np.array([ 1 if i==2 else 0 for i in datasheet])
-
-datasheet = []
-for row in sheet2.iter_rows(min_row=3, min_col=12, max_col=12):     
-    for cell in row:
-        datasheet.append(cell.value)
-    
-y_test = np.array([ 1 if i==2 else 0 for i in datasheet])
 
 
 #create 3 layers with 30 neurons each
@@ -112,10 +60,9 @@ train_errors = list()
 test_errors = list()
 cont = 0 
 for alpha in alphas:
-    print("a: ", alpha)
     mlp.set_params(alpha=alpha)
-    mlp.fit(training_data, y_train.transpose())
-    train_errors.append(1 - mlp.score( training_data, y_train.transpose()))
+    mlp.fit(X_training, y_training.transpose())
+    train_errors.append(1 - mlp.score( X_training, y_training.transpose()))
     test_errors.append(1- mlp.score(X_test, y_test.transpose()))
 
 i_alpha_optim = np.argmax(test_errors)
@@ -146,4 +93,7 @@ fpr = fp / (tn + fp)
 fnr = fn / (tp + fn)
 print("fpr: ", fpr)
 print("fnr: ", fnr)
+
+accuracy = (tp + tn) /(tp + tn+fp+fn)
+print("ac: ", accuracy)
 print(predictions)
