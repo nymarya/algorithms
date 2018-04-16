@@ -1,10 +1,11 @@
 from openpyxl import load_workbook
 import numpy as np
 from sklearn.decomposition import PCA
-import cov
 import math
 import read
 
+# #############################################################################
+# Get all data from DL03_Teste01-Dados.xlsx
 data = read.read()
 
 data_training = data[0]
@@ -12,12 +13,14 @@ y_training = np.array([ 1 if i==2 else 0 for i in data[1]])
 data_test = data[2]
 y_test = np.array([ 1 if i==2 else 0 for i in data[3]])
 
+# #############################################################################
+# Process the data
+# ref: https://plot.ly/ipython-notebooks/principal-component-analysis/
 
 from sklearn.preprocessing import StandardScaler
 train_data_std = StandardScaler().fit_transform(data_training)
 
-#get covariance matrix
-#egenvalues and eigenvectors
+#get covariance matrix and eigenvalues and eigenvectors
 cov_mat = np.cov(train_data_std.T)
 eig_vals, eig_vecs = np.linalg.eig(cov_mat)
 
@@ -32,7 +35,6 @@ eig_pairs.sort()
 eig_pairs.reverse()
 
 #reduce the dimension
-
 matrix_w = np.hstack((eig_pairs[0][1].reshape(9,1), 
                       eig_pairs[1][1].reshape(9,1),
                       eig_pairs[2][1].reshape(9,1), 
@@ -44,21 +46,22 @@ matrix_w = np.hstack((eig_pairs[0][1].reshape(9,1),
                       
 
 X_training= train_data_std.dot(matrix_w).astype('float32')
-  
+
+#apply PCA on test data  
 test_data_std = StandardScaler().fit_transform(data_test)
 X_test = test_data_std.dot(matrix_w)
 
-
-#create 3 layers with 30 neurons each
-from sklearn.neural_network import MLPClassifier
-mlp = MLPClassifier(hidden_layer_sizes=(50, 100), batch_size=100)
-
 # #############################################################################
+# Buildind and training the model
+
+#create 2 layers with 50 and 100 neurons
+from sklearn.neural_network import MLPClassifier
+mlp = MLPClassifier(hidden_layer_sizes=(50, 100), batch_size=40)
+
 # Compute train and test errors
 alphas = np.logspace(-5, 1)
 train_errors = list()
 test_errors = list()
-cont = 0 
 for alpha in alphas:
     mlp.set_params(alpha=alpha)
     mlp.fit(X_training, y_training.transpose())
@@ -68,23 +71,22 @@ for alpha in alphas:
 i_alpha_optim = np.argmax(test_errors)
 alpha_optim = alphas[i_alpha_optim]
 print("Optimal regularization parameter : %s" % alpha_optim)
-print(train_errors)
-print(test_errors)
+#print(train_errors)
+#print(test_errors)
 
-#teste
-#prediction
+# #############################################################################
+# Test the model
 predictions = mlp.predict(X_test)
+
+from sklearn.metrics import mean_squared_error
+print (mean_squared_error(y_test, predictions))
 
 #prin confusion matrix
 from sklearn.metrics import classification_report,confusion_matrix
+print(classification_report(y_test,predictions))
 confusion = confusion_matrix(y_test,predictions)
 print(confusion)
 
-print(classification_report(y_test,predictions))
-from sklearn.metrics import mean_squared_error
-print (mean_squared_error(y_test, predictions))
-# fp_ratio = fpcount
-# fn_ratio =
 fp = confusion[0][1]
 fn = confusion[1][0]
 tp = confusion[1][1]
