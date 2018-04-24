@@ -43,6 +43,7 @@
  */
 double newton( std::vector< std::vector<double> > points, double x){
 
+    // Recupera diferenças divididas
     auto coeff = divided_difference(points);
 
     int n = points.size();
