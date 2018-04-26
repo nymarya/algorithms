@@ -2,6 +2,14 @@
 #include "methods.h"
 #include <cassert>
 
+double f(double x){
+    return (1 + 881*x/210 - 849*std::pow(x,2)/420 + 89*std::pow(x,3)/420);
+}
+
+double fPrime(double x){
+    return(1.0/420 * (1762 - 1698*x + 267*std::pow(x,2)));
+}
+
 int main(){
 
     std::vector<std::vector<double>> points = {
@@ -21,10 +29,19 @@ int main(){
 
 
     // Questão 2
-    auto y = newton(points, 4);
+    double y = newton(points, 4);
     assert( y == -1);
     y = newton(points, 28);
     assert( y == 15927.0/5);
+    y = newton(points, 9);
+    assert( y == 29.5);
+
+    std::cout << std::left << std::setw(12)<< "#"<< std::setw(13)<< "Y\n";     
+    for(auto i(-10); i<=10; ++i){        
+        std::cout << std::left << std::setw(12) << newton(points, i)  << std::fixed;        
+        std::cout << "\n";     
+    }
+
 
     std::vector<std::vector<double>> points2 = {
         {3,1},

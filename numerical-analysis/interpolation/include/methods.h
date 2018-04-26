@@ -21,12 +21,4 @@ std::vector<double> divided_difference( std::vector< std::vector<double> > point
  */
 double newton( std::vector< std::vector<double> > points, double x);
 
-/**
- * Função que implementa o método de Newton-Raphson.
- * @param func Função da qual serão extraídas as raízes
- * @param funcPrime Derivada da função 'func'.
- * @param x Ponto inicial.
- *
-double lagrange(double(*func)(double ), double(*funcPrime)(double), double x);
-*/
 #endif
