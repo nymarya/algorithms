@@ -49,7 +49,7 @@ double newton( std::vector< std::vector<double> > points, double x){
     int n = points.size();
     auto index = 0;
 
-    auto m = 1;
+    auto m = 1.0;
 
     auto result = coeff[index];
 
@@ -60,7 +60,6 @@ double newton( std::vector< std::vector<double> > points, double x){
         m *= (x - points[i-1][0]);
         
         result += m * coeff[index];
-        
     }
 
     return result;

@@ -30,15 +30,20 @@ int main(){
 
     // Questão 2
     double y = newton(points, 4);
+    
     assert( y == -1);
-    y = newton(points, 28);
-    assert( y == 15927.0/5);
-    y = newton(points, 9);
-    assert( y == 29.5);
+    y = newton(points, -0.215486229);
+    assert( std::abs(y) < std::pow(10, -5.0));
+    y = newton(points, 6.2519274);
+    assert( std::abs(y) < std::pow(10, -5.0));
+    y = newton(points, 3.502884607);
+    assert( std::abs(y) < std::pow(10, -5.0));
+    
 
-    std::cout << std::left << std::setw(12)<< "#"<< std::setw(13)<< "Y\n";     
-    for(auto i(-10); i<=10; ++i){        
-        std::cout << std::left << std::setw(12) << newton(points, i)  << std::fixed;        
+    std::cout << std::left << std::setw(12)<< "#"<< std::setw(13)<< "X" << std::setw(13)<< "Y\n";     
+    for(auto i(-10); i<=10; ++i){   
+        std::cout << std::left << std::setw(12)<< " "<< std::setw(13)<< i  << std::fixed;      
+        std::cout << std::setw(13) << newton(points, i)  << std::fixed;        
         std::cout << "\n";     
     }
 
