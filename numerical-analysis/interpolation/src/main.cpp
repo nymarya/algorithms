@@ -6,10 +6,6 @@ double f(double x){
     return (1 + 881*x/210 - 849*std::pow(x,2)/420 + 89*std::pow(x,3)/420);
 }
 
-double fPrime(double x){
-    return(1.0/420 * (1762 - 1698*x + 267*std::pow(x,2)));
-}
-
 int main(){
 
     std::vector<std::vector<double>> points = {
@@ -41,7 +37,7 @@ int main(){
     
 
     std::cout << std::left << std::setw(12)<< "#"<< std::setw(13)<< "X" << std::setw(13)<< "Y\n";     
-    for(auto i(-10); i<=10; ++i){   
+    for(auto i(-10.0); i<=10.0; i+=0.5 ){   
         std::cout << std::left << std::setw(12)<< " "<< std::setw(13)<< i  << std::fixed;      
         std::cout << std::setw(13) << newton(points, i)  << std::fixed;        
         std::cout << "\n";     

@@ -11,11 +11,13 @@
 
     std::vector<double> result( n*( 1+ n)/2 );
 
+    //casos base
     for(auto i = 0; i < n; i++ ){
         
         result[i] = points[i][1]; 
     }
 
+    //calcula coeficientes usando resultados anteriores
     auto index = 1;
     for(auto i = 1; i < n; i++ ){
 
@@ -25,13 +27,10 @@
 
             index++;
         }
-
         index++;
-        
     }
 
     return result;
-
 
  }
 
@@ -52,7 +51,7 @@ double newton( std::vector< std::vector<double> > points, double x){
     auto m = 1.0;
 
     auto result = coeff[index];
-
+    
     for( int i = 1; i < points.size() ; i++){
 
         index += n--;
