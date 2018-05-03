@@ -13,7 +13,6 @@ std::vector<double> divide(double a, double b, int n){
     double h = std::abs(b - a) /(n-1);
     for(int i =0; i <n; i++){
         points[i] = a;
-        std::cout << points[i] << " \n";
         a += h;
         
     }
@@ -45,7 +44,7 @@ double trapezoidal_rule(double(*func)(double ),  double x0, double x1){
 double simpson_rule(double(*func)(double ),  double x0, double x1, double x2){
     double h = std::abs(x1 - x0);
 
-    return (h/3 * func(x0) + 4*func(x1) + func(x2));
+    return (h/3.0 * (func(x0) + 4*func(x1) + func(x2)));
 }
 
 /**
@@ -60,5 +59,5 @@ double simpson_rule(double(*func)(double ),  double x0, double x1, double x2){
 double three_eights_rule(double(*func)(double ),  double x0, double x1, double x2, double x3){
     double h = std::abs(x1 - x0);
 
-    return (3 * h/8 * func(x0) + 3 * func(x1) + 3 * func(x2) + func(x3));
+    return (3 * h/8 * (func(x0) + 3 * func(x1) + 3 * func(x2) + func(x3)));
 }
