@@ -28,14 +28,15 @@ int main(){
     double y = newton(points, 4);
     
     assert( y == -1);
-    y = newton(points, -0.215486229);
+    y = newton(points, -0.215486);
     assert( std::abs(y) < std::pow(10, -5.0));
-    y = newton(points, 6.2519274);
+    y = newton(points, 6.251927);
     assert( std::abs(y) < std::pow(10, -5.0));
-    y = newton(points, 3.502884607);
+    y = newton(points, 3.502884);
     assert( std::abs(y) < std::pow(10, -5.0));
     
 
+    //Imprime pontos para montar gráfico
     std::cout << std::left << std::setw(12)<< "#"<< std::setw(13)<< "X" << std::setw(13)<< "Y\n";     
     for(auto i(-10.0); i<=10.0; i+=0.5 ){   
         std::cout << std::left << std::setw(12)<< " "<< std::setw(13)<< i  << std::fixed;      
@@ -43,7 +44,7 @@ int main(){
         std::cout << "\n";     
     }
 
-
+    //Testes adicionais
     std::vector<std::vector<double>> points2 = {
         {3,1},
         {5, 3},
@@ -82,5 +83,5 @@ int main(){
     y = newton(points4, 45);
     assert( y == 16484005);
 
-
+    return 0;
 }
