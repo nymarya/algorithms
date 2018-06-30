@@ -1,5 +1,10 @@
 #include "least-squares.h"
 
+/**
+ * Função que aproxima um conjunto de pontos com polinômio.
+ * @param points Pontos a serem aproximados
+ * @param order Grau do polinômio utilizado para aproximar os pontos.
+ */
 std::vector<double>  minimos( std::vector<std::vector<double>> points, int order){
 
     std::vector<std::vector<double>> matrix ( order );
