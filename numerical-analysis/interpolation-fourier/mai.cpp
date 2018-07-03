@@ -43,12 +43,12 @@ void approximate( double(*func)(double ), double a, double b, double n){
         // b_k com k de 1 a n-1
         if( k > 0 && k < n){
             std::cout << "b" << k << ": " << b << std::endl;
-            s += "+ " + std::to_string(a) + "* cos(" + std::to_string(k) + "*x)";
-            s += "+ " + std::to_string(b) + "* sin(" + std::to_string(k) + "*x)";
+            s += "+ (" + std::to_string(a) + ")* cos(" + std::to_string(k) + "*x)";
+            s += "+ (" + std::to_string(b) + ")* sin(" + std::to_string(k) + "*x)";
         }  else if (k == 0){
             s += std::to_string(a)+ "/2 ";
         } else{
-            s += "+ " + std::to_string(a) + "* cos(" + std::to_string(k) + "*x)";
+            s += "+ (" + std::to_string(a) + ")* cos(" + std::to_string(k) + "*x)";
         } 
     }
 
