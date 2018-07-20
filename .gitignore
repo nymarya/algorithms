@@ -3,9 +3,10 @@
 *.pyc
 *.out
 
-.xml
-.pdf
-.zip
+*.xml
+*.pdf
+*.zip
+*.rb
 
 .classpath
 .project
