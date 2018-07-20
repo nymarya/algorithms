@@ -1,0 +1,11 @@
+.vscode
+
+*.pyc
+*.out
+
+.xml
+.pdf
+.zip
+
+.classpath
+.project
