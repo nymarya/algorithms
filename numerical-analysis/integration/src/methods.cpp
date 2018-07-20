@@ -30,7 +30,7 @@ std::vector<double> divide(double a, double b, int n){
 double trapezoidal_rule(double(*func)(double ),  double x0, double x1){
     double h = std::abs(x1 - x0);
 
-    return (h/2 * func(x0) + func(x1));
+    return (h/2 * (func(x0) + func(x1)));
 }
 
 /**
