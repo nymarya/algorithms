@@ -9,25 +9,25 @@ int main(int argc, char **argv){
 
 	
 
-	struct rlimit rlim;
+	    struct rlimit rlim;
         getrlimit(RLIMIT_NPROC, &rlim);
         int cur = rlim.rlim_cur;
      	int max = rlim.rlim_max;
-	printf("RLIMIT :rlim_cur => %i, :rlim_max => %i", cur, max);
+	    printf("RLIMIT :rlim_cur => %i, :rlim_max => %i", cur, max);
 
-	// Change the limit 
-	rlim.rlim_cur = limit; 
-	rlim.rlim_max = limit; 
+        // Change the limit 
+        rlim.rlim_cur = limit; 
+        rlim.rlim_max = limit; 
 
-	// Now call setrlimit() to set the  
-	// changed value. 
-	setrlimit (RLIMIT_NPROC, &rlim);
+        // Now call setrlimit() to set the  
+        // changed value. 
+        setrlimit (RLIMIT_NPROC, &rlim);
 
-	// Check
-	getrlimit(RLIMIT_NPROC, &rlim);
-	cur = rlim.rlim_cur;
-     	max = rlim.rlim_max;
-	printf("\nRLIMIT :rlim_cur => %i, :rlim_max => %i", cur, max); 
+        // Check
+        getrlimit(RLIMIT_NPROC, &rlim);
+        cur = rlim.rlim_cur;
+        max = rlim.rlim_max;
+        printf("\nRLIMIT :rlim_cur => %i, :rlim_max => %i", cur, max); 
 
     }
    
