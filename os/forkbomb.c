@@ -1,7 +1,1 @@
-#include <unistd.h>
-
-int main(void){
-    while(1){
-        fork();
-    }
-}
+#include <unistd.h>int main(void){    while(1){        fork();    }}
