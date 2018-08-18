@@ -4,41 +4,11 @@
 #include <stdint.h>
 #include <sys/types.h>
 #include <dirent.h>
+#include <unistd.h> 
 
-struct node 
-{
-    int data;
-    struct node *left;
-    struct node *right;
-    // Vai ser arvore n-aria
-};
- 
-/* newNode() allocates a new node with the given data and NULL left and 
-   right pointers. */
-struct node* newNode(int data)
-{
-  // Allocate memory for new node 
-  struct node* node = (struct node*)malloc(sizeof(struct node));
- 
-  // Assign data to this node
-  node->data = data;
- 
-  // Initialize left and right children as NULL
-  node->left = NULL;
-  node->right = NULL;
-  return(node);
-}
-
-void buildProcessTree(long tgid){
-   //Recupera processo pai
-   
-   //Procura processo pai na arvore
-   
-   // Adiciona à lista de filhos
-}
 
 void print_status(long tgid) {
-    char path[40], line[100], *p;
+    char path[40], line[100], *p, *n, *pp, name[100],pid[10],ppid[10];
     FILE* statusf;
 
     // Acessa a pasta /proc/pid/status
@@ -51,42 +21,69 @@ void print_status(long tgid) {
 
     // Abre o arquivos
     // Formato das linhas: State:    S (sleeping)
+    int j = 0;
     while(fgets(line, 100, statusf)) {
-        if(strncmp(line, "State:", 6) != 0)
+        //printf("%i %s",j++, line);
+        if(strncmp(line, "State:", 6) == 0){
+            // Ignore "State:" (pula os 7 caracteres) and whitespace (pula os espaços em branco)
+            p = line + 9;
+            while(isspace(*p)) ++p;
+    
+            printf("Status: %s", p);
+        } else if ((strncmp(line, "Name:", 5) == 0)){
+            // Ignore "State:" (pula os 7 caracteres) and whitespace (pula os espaços em branco)
+            n = line + 6;
+            while(isspace(*n)) ++n;
+    
+            printf("%6d\nNome: %s", tgid, n--);
+        
+        } else if ((strncmp(line, "PPid:", 5) == 0)){
+            // Ignore "State:" (pula os 7 caracteres) and whitespace (pula os espaços em branco)
+            pp = line + 5;
+            while(isspace(*pp)) ++pp;
+    
+            printf("ppid: %s", pp);
+        
+        } else {
             continue;
-        // Ignore "State:" (pula os 7 caracteres) and whitespace (pula os espaços em branco)
-        p = line + 7;
-        while(isspace(*p)) ++p;
+        }
 
-        printf("%6d %s", tgid, p);
-        break;
     }
 
     fclose(statusf);
 }
 
-int main(){
 
-	DIR* proc = opendir("/proc");
-	struct dirent* ent;
-	long tgid;
+int main(int argc, char ** argv ){
+    
+    if(argc>1){
+        long tgid = atol(argv[2]);
 
-	if(proc == NULL) {
-	    perror("opendir(/proc)");
-	    return 1;
-	}
-
-	struct node *root = newNode(0);
-
-	while(ent = readdir(proc)) {
-	    if(!isdigit(*ent->d_name))
-		continue;
-
-	    tgid = strtol(ent->d_name, NULL, 10);
-
+    	DIR* proc = opendir("/proc");
+    	struct dirent* ent;
+    	//long tgid;
+    
+    	if(proc == NULL) {
+    	    perror("opendir(/proc)");
+    	    return 1;
+    	}
+    
+    	while(ent = readdir(proc)) {
+    	    if(!isdigit(*ent->d_name))
+    		continue;
+    
+    	    //tgid = strtol(ent->d_name, NULL, 10);
+    
+            int i = 0;
+            //while( )
+    	    //print_status(tgid);
+    	}
+	int i = 0;
+    while( i++ < 1){
 	    print_status(tgid);
+	    sleep(1);
 	}
-
-	closedir(proc);
+    	closedir(proc);
+    }
 
 }
