@@ -13,10 +13,10 @@ int main(int argc, char ** argv ){
     	int i = 0;
     	while( i++ < 10){
     	    // imprime número de processos
-	    system("ps aux | wc -l");
+			system("ps aux | wc -l");
 
-	    // imprime processos por usuário
-	    system("ps -eo user=|sort|uniq -c");
+			// imprime processos por usuário
+			system("ps -eo user=|sort|uniq -c");
     	    sleep(1);
     	}
 
