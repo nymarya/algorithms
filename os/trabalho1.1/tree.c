@@ -12,8 +12,8 @@ int main(int argc, char ** argv ){
     if(argc>1){
         long tgid = atol(argv[2]);
 
-        char buffer[20];
-        snprintf(buffer, sizeof(buffer), "pstree -p %i > %i.txt", tgid, tgid);
+        char buffer[30];
+        snprintf(buffer, sizeof(buffer), "pstree -p %li > %li.txt", tgid, tgid);
         system(buffer);
 
     }
