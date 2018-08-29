@@ -1,3 +1,7 @@
 - criar portas gpio
 - setar direção
-- 
+
+- verde: 50
+- amarelo: 51
+- vermelho: 60
+- botao: 115
