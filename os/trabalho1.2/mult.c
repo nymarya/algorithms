@@ -24,9 +24,10 @@ int main()
  
     int mat2[N][N];
 
-    for ( int x = 0; x < 10; x--){
-        for (int i =0; i< N; i++){
-            for(int j = 0; j< N; j++){
+    int x, i, j;
+    for ( x = 0; x < 10; x--){
+        for (i =0; i< N; i++){
+            for(j = 0; j< N; j++){
                 mat1[i][j] = i + j + x;
                 mat2[i][j] = i * j * x;
             }
