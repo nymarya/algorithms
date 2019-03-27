@@ -36,7 +36,26 @@ iff.intro(
     and.intro ( and.intro (h.left) (h.right.left) ) ( h.right.right)
 ) -- end proof
 
-example : (p ∨ q) ∨ r ↔ p ∨ (q ∨ r) := sorry
+example : (p ∨ q) ∨ r ↔ p ∨ (q ∨ r) := 
+iff.intro(
+    assume h: (p ∨ q) ∨ r,
+    or.elim h
+    (-- begin p ∨ q -> p ∨ (q ∨ r)
+        assume h1: p ∨ q,
+        or.elim h1
+        (
+            assume hp: p
+            show p ∨ (q ∨ r), from or.in
+        )
+        (
+        )
+
+
+    )-- end
+) --end proof (p ∨ q) ∨ r →  p ∨ (q ∨ r)
+(
+) -- end proof p ∨ (q ∨ r) → (p ∨ q) ∨ r
+
 
 -- distributivity
 example : p ∧ (q ∨ r) ↔ (p ∧ q) ∨ (p ∧ r) := sorry
