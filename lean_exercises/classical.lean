@@ -13,7 +13,17 @@ iff.intro(
     show p ∧ q, from and.intro( and.right h)(and.left h)
 ) --end proof
 
-example : p ∨ q ↔ q ∨ p := sorry
+example : p ∨ q ↔ q ∨ p := 
+iff.intro(
+    assume h: p ∨ q,
+    or.elim h (λ hp, or.inr hp) (λ hq, or.inl hq)
+     -- proof p ∨ q → q ∨ p
+) 
+(
+assume h: q ∨ p,
+    or.elim h (λ hq, or.inr hq) (λ hq, or.inl hq)
+     -- proof q ∨ p → p ∨ q
+)
 
 -- associativity of ∧ and ∨
 example : (p ∧ q) ∧ r ↔ p ∧ (q ∧ r) := sorry
