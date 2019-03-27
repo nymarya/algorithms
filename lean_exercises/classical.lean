@@ -26,7 +26,16 @@ assume h: q ∨ p,
 )
 
 -- associativity of ∧ and ∨
-example : (p ∧ q) ∧ r ↔ p ∧ (q ∧ r) := sorry
+example : (p ∧ q) ∧ r ↔ p ∧ (q ∧ r) := 
+iff.intro(
+    assume h: (p ∧ q) ∧ r,
+    and.intro ( h.left.left ) ( and.intro (h.left.right) (h.right))
+)
+(
+    assume h: p ∧ (q ∧ r),
+    and.intro ( and.intro (h.left) (h.right.left) ) ( h.right.right)
+) -- end proof
+
 example : (p ∨ q) ∨ r ↔ p ∨ (q ∨ r) := sorry
 
 -- distributivity
