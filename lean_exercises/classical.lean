@@ -79,7 +79,34 @@ iff.intro(
 
 
 -- distributivity
-example : p ∧ (q ∨ r) ↔ (p ∧ q) ∨ (p ∧ r) := sorry
+example : p ∧ (q ∨ r) ↔ (p ∧ q) ∨ (p ∧ r) := 
+iff.intro(-- begin p ∧ (q ∨ r) → (p ∧ q) ∨ (p ∧ r)
+    assume h: p ∧ (q ∨ r),
+    have hp: p, from h.left,
+    or.elim h.right 
+    ( --begin p , q  → (p ∧ q) ∨ (p ∧ r)
+        assume hq: q,
+        show (p ∧ q) ∨ (p ∧ r), from or.inl ⟨ hp, hq⟩ 
+    )
+    (--begin p , r  → (p ∧ q) ∨ (p ∧ r)
+        assume hr: r,
+        show (p ∧ q) ∨ (p ∧ r), from or.inr (and.intro hp hr) 
+    )--end p, r → (p ∧ q) ∨ (p ∧ r)
+)-- end p ∧ (q ∨ r) → (p ∧ q) ∨ (p ∧ r)
+(-- begin (p ∧ q) ∨ (p ∧ r) → p ∧ (q ∨ r)
+    assume h: (p ∧ q) ∨ (p ∧ r),
+    or.elim h
+    (-- begin (p ∧ q) → p ∧ (q ∨ r)
+        assume h1: p ∧ q,
+        show p ∧ (q ∨ r), from and.intro h1.left (or.inl h1.right)
+    )
+    (-- begin (p ∧ r) → p ∧ (q ∨ r)
+        assume h1: p ∧ r,
+        show p ∧ (q ∨ r), from and.intro h1.left (or.inr h1.right)
+    ) 
+
+)-- end (p ∧ q) ∨ (p ∧ r) → p ∧ (q ∨ r)
+
 example : p ∨ (q ∧ r) ↔ (p ∨ q) ∧ (p ∨ r) := sorry
 
 -- other properties
