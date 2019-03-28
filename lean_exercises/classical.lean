@@ -107,10 +107,39 @@ iff.intro(-- begin p ∧ (q ∨ r) → (p ∧ q) ∨ (p ∧ r)
 
 )-- end (p ∧ q) ∨ (p ∧ r) → p ∧ (q ∨ r)
 
-example : p ∨ (q ∧ r) ↔ (p ∨ q) ∧ (p ∨ r) := sorry
+example : p ∨ (q ∧ r) ↔ (p ∨ q) ∧ (p ∨ r) := 
+iff.intro
+( -- begin p ∨ (q ∧ r) →  (p ∨ q) ∧ (p ∨ r)
+    assume h: p ∨ (q ∧ r),
+    or.elim h
+    ( -- begin p →  (p ∨ q) ∧ (p ∨ r)
+        assume hp: p,
+        show (p ∨ q) ∧ (p ∨ r), from and.intro (or.inl hp) (or.inl hp)
+    ) --end p →  (p ∨ q) ∧ (p ∨ r)
+    ( --begin (q ∧ r) →  (p ∨ q) ∧ (p ∨ r)
+        assume hqr: q ∧ r,
+        show (p ∨ q) ∧ (p ∨ r), from and.intro (or.inr hqr.left) (or.inr hqr.right)
+    ) --end (q ∧ r) →  (p ∨ q) ∧ (p ∨ r)
+)-- end p ∨ (q ∧ r) →  (p ∨ q) ∧ (p ∨ r)
+(-- begin (p ∨ q) ∧ (p ∨ r) → p ∨ (q ∧ r)
+    assume h: (p ∨ q) ∧ (p ∨ r),
+    show p ∨ (q ∧ r), from sorry
+)-- end (p ∨ q) ∧ (p ∨ r) → p ∨ (q ∧ r)
+
 
 -- other properties
-example : (p → (q → r)) ↔ (p ∧ q → r) := sorry
+example : (p → (q → r)) ↔ (p ∧ q → r) := 
+iff.intro
+( --begin (p → (q → r)) → (p ∧ q → r)
+    --assume h: (p → (q → r)),
+    assume hp: p → (q →  r),
+    --have ap: q→ r, from hp,
+    show (p ∧ q → r), from sorry
+)
+(
+    assume h: p ∧ q → r,
+    show p → (q → r), from sorry
+)
 example : ((p ∨ q) → r) ↔ (p → r) ∧ (q → r) := sorry
 example : ¬(p ∨ q) ↔ ¬p ∧ ¬q := sorry
 example : ¬p ∨ ¬q → ¬(p ∧ q) := sorry
