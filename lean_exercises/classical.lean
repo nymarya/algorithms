@@ -44,16 +44,37 @@ iff.intro(
         assume h1: p ∨ q,
         or.elim h1
         (
-            assume hp: p
-            show p ∨ (q ∨ r), from or.in
+            assume hp: p,
+            show p ∨ (q ∨ r), from or.inl hp  
         )
         (
+            assume hq: q,
+            show p ∨ (q ∨ r), from or.inr (or.inl hq)
         )
-
-
-    )-- end
+    )-- end p ∨ q -> p ∨ (q ∨ r)
+    (--begin r → p ∨ (q ∨ r)
+        assume hr: r,
+        show p ∨ (q ∨ r), from or.inr (or.inr hr) 
+    )
 ) --end proof (p ∨ q) ∨ r →  p ∨ (q ∨ r)
-(
+( -- begin p ∨ (q ∨ r) → (p ∨ q) ∨ r
+    assume h: p ∨ (q ∨ r),
+    or.elim h
+    (--begin p → (p ∨ q) ∨ r
+        assume hp: p,
+        show (p ∨ q) ∨ r, from or.inl( or.inl hp)
+    )--end p → (p ∨ q) ∨ r
+    (--begin q ∨ r → (p ∨ q) ∨ r
+        assume h2: q ∨ r,
+        or.elim h2(
+            assume hq: q,
+            show (p ∨ q) ∨ r, from or.inl( or.inr hq)
+        )
+        (
+            assume hr: r,
+            show (p ∨ q) ∨ r, from or.inr hr
+        )
+    )
 ) -- end proof p ∨ (q ∨ r) → (p ∨ q) ∨ r
 
 
