@@ -133,12 +133,14 @@ iff.intro
 ( --begin (p → (q → r)) → (p ∧ q → r)
     --assume h: (p → (q → r)),
     assume hp: p → (q →  r),
-    --have ap: q→ r, from hp,
-    show (p ∧ q → r), from sorry
+    assume h2: p ∧ q,
+    show r, from hp (h2.left) (h2.right)
 )
 (
-    assume h: p ∧ q → r,
-    show p → (q → r), from sorry
+    assume h: p ∧ q -> r,
+    assume hp: p,
+    assume hq: q,
+    show r, from h (and.intro hp hq)
 )
 example : ((p ∨ q) → r) ↔ (p → r) ∧ (q → r) := sorry
 example : ¬(p ∨ q) ↔ ¬p ∧ ¬q := sorry
