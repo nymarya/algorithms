@@ -1,4 +1,3 @@
-
 -- constants
 variables x y z u v w :Prop
 
@@ -22,9 +21,11 @@ sorry
 
 example: (C x y z z ↔ x = y) ↔ (B x y x) :=
 iff.intro(
-    assume h1: C x y z z ↔ x = y,
-    show B x y x , 
+    assume h1: C x y z z ↔ x = y, 
+    show B x y x, from sorry
 ) --end iff.intro
 (
-    assum h2: 
+    assume h2: B x y x,
+    show  C x y z z ↔ x = y, from sorry
+
 )
