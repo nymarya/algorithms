@@ -29,3 +29,5 @@ iff.intro(
     show  C x y z z ↔ x = y, from sorry
 
 )
+
+--https://en.wikipedia.org/wiki/Tarski%27s_axioms
