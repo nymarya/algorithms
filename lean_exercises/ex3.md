@@ -8,9 +8,10 @@ Uma teoria formal é composta de 3 elementos: linguagem, regras de inferência e
 ## Exemplo
 Sistema MIU
 ### Linguagem
-Alfabeto = { M, I, U}
-(B) Todo símbolo no alfabeto está na linguagem.
-(I) 
+Símbolos = { M, I, U}
+
+### WFFs
+M, I e U são wwfs.
 
 ### Axiomas
 1. |- MI
