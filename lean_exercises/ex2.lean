@@ -1,16 +1,17 @@
 -- Formalize em LEAN  os axiomas para a Teoria de Grupos.
-variables (α : Type) (e : Type)
+variables (α : Type)
+variables (a b c e : α )
 
 -- relation
-variable p: α → α → Prop
+variable p: α → α → α
 
-infix `+`:= p
+local infix `+` := p
 
 -- axioms
-axiom closure: ∀x y : α, x + y : α;
+-- axiom closure: ∀ {x y : α}, ( x + y : α )
 
-axiom ass : ∀ a b c : α,  a + (b + c) = (a + b) + c;
+axiom ass : ∀ a b c : α ,  (p a (p b c) = p ( p a b) c) 
 
-axiom id : ∃ e : α , ∀ x : α, e + x = x = x + e;
+axiom group_id : ∃ e : α , ∀ x : α, (e + x = x ∧  x = x + e)
 
-axiom inv : ∀ x : α, ∃ b : α , a + b = e = b + a;
+axiom inv : ∀ x : α, ∃ b : α , (a + b = e ∧  e = b + a)
