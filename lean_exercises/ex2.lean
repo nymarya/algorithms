@@ -8,9 +8,9 @@ variable p: α → α → α
 local infix `+` := p
 
 -- axioms
--- axiom closure: ∀ {x y : α}, ( x + y : α )
+axiom closure: ∀ x y : α,  ∃ c : α , ( a + b  = c )
 
-axiom ass : ∀ a b c : α ,  (p a (p b c) = p ( p a b) c) 
+axiom ass : ∀ a b c : α ,  (a + ( b +  c) = ( a + b) +  c) 
 
 axiom group_id : ∃ e : α , ∀ x : α, (e + x = x ∧  x = x + e)
 
